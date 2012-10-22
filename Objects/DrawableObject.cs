@@ -4,18 +4,30 @@ namespace NekuSoul.SharpDX_Engine.Objects
 {
     public class Coordinates
     {
-        float X = 0f;
-        float Y = 0f;
+        public float X = 0f;
+        public float Y = 0f;
+        public float width = 0f;
+        public float heigth = 0f;
+
+        public Coordinates() { }
+        public Coordinates(float X, float Y, float width, float heigth)
+        {
+            this.X = X;
+            this.Y = Y;
+            this.width = width;
+            this.heigth = heigth;
+        }
     }
 
     public class DrawableObject
     {
-        Bitmap Texture;
-        Coordinates Position;
+        public string Texture;
+        public Coordinates Position;
 
-        public DrawableObject(RenderTarget RT)
+        public DrawableObject()
         {
-            Texture = Utitities.Converter.LoadFromFile(RT, "Smiley.bmp");
+            Texture = "Default";
+            Position = new Coordinates(0f, 0f, 10f, 10f);
         }
     }
 }

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{39BEBAE1-C204-42C5-8B77-D6D342446796}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NekuSoul.SharpDX_Engine</RootNamespace>
     <AssemblyName>NekuSoul.SharpDX_Engine</AssemblyName>
@@ -61,6 +61,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Instance.cs" />
+    <Compile Include="Graphics\Renderer.cs" />
+    <Compile Include="Graphics\TextureManager.cs" />
     <Compile Include="Objects\DrawableObject.cs" />
     <Compile Include="Utitities\Converter.cs" />
   </ItemGroup>
