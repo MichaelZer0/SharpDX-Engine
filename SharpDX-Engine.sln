@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDX-Engine", "SharpDX-Engine.csproj", "{39BEBAE1-C204-42C5-8B77-D6D342446796}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDX-Test", "..\SharpDX-Test\SharpDX-Test.csproj", "{5ADCF97B-C744-4BA4-8951-C50DA802E387}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{39BEBAE1-C204-42C5-8B77-D6D342446796}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39BEBAE1-C204-42C5-8B77-D6D342446796}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39BEBAE1-C204-42C5-8B77-D6D342446796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ADCF97B-C744-4BA4-8951-C50DA802E387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ADCF97B-C744-4BA4-8951-C50DA802E387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ADCF97B-C744-4BA4-8951-C50DA802E387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ADCF97B-C744-4BA4-8951-C50DA802E387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
