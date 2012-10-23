@@ -22,9 +22,12 @@ namespace NekuSoul.SharpDX_Engine.Graphics
             _RenderTarget.Clear(Color.Black);
             foreach (DrawableObject _DrawableObject in DrawList)
             {
-                _RenderTarget.FillRectangle(
+                _RenderTarget.DrawBitmap(
+                    _TextureManager.GetTexture(_DrawableObject.Texture),
                     Utitities.Converter.RectangleToRectangleF(_DrawableObject.Position),
-                    Utitities.Converter.BitmapToBitmapBrush(_RenderTarget, _TextureManager.GetTexture(_DrawableObject.Texture)));
+                    1f,
+                    BitmapInterpolationMode.NearestNeighbor
+                    );
             }
             _RenderTarget.EndDraw();
         }

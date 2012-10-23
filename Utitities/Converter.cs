@@ -12,7 +12,7 @@ namespace NekuSoul.SharpDX_Engine.Utitities
 
         public static RectangleF RectangleToRectangleF(NekuSoul.SharpDX_Engine.Objects.Rectangle _Coordinates)
         {
-            return new RectangleF((int)_Coordinates.X, (int)_Coordinates.Y, (int)_Coordinates.X + (int)_Coordinates.width, (int)_Coordinates.Y + (int)_Coordinates.heigth);
+            return new RectangleF(_Coordinates.X, _Coordinates.Y, _Coordinates.X + _Coordinates.width, _Coordinates.Y + _Coordinates.heigth);
         }
 
         public static BitmapBrush BitmapToBitmapBrush(RenderTarget _RenderTarget, Bitmap _Bitmap)

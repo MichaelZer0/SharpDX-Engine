@@ -17,12 +17,14 @@ namespace NekuSoul.SharpDX_Engine
 {
     public class Game
     {
-        public static void Initialize(Scene StartScene)
+        public static void Initialize(Scene StartScene,int Width,int Height)
         {
             GC.Collect();
 
             #region Initializing
             RenderForm form = new RenderForm();
+            form.Width = Width;
+            form.Height = Height;
 
             // SwapChain description
             SwapChainDescription desc = new SwapChainDescription()
@@ -71,8 +73,17 @@ namespace NekuSoul.SharpDX_Engine
             #region Main loop
             RenderLoop.Run(form, () =>
             {
+                _Scene.Update();
+                foreach (DrawableObject _DrawableObjet in _Scene.DrawableObjectList)
+                {
+                    _DrawableObjet.Update();
+                }
                 _Renderer.Draw(_Scene.DrawableObjectList);
                 swapChain.Present(0, PresentFlags.None);
+                if (stopwatch.ElapsedMilliseconds % 1000 == 0)
+                {
+                    GC.Collect();
+                }
             });
             #endregion
 
