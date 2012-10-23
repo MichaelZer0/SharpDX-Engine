@@ -11,18 +11,21 @@ using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
+using System;
 
-namespace NekuSoul.SharpDX_Engine.Game
+namespace NekuSoul.SharpDX_Engine
 {
-    public class Instance
+    public class Game
     {
-        public static void Initialize()
+        public static void Initialize(Scene StartScene)
         {
+            GC.Collect();
+
             #region Initializing
-            var form = new RenderForm();
+            RenderForm form = new RenderForm();
 
             // SwapChain description
-            var desc = new SwapChainDescription()
+            SwapChainDescription desc = new SwapChainDescription()
             {
                 BufferCount = 1,
                 ModeDescription =
@@ -51,11 +54,11 @@ namespace NekuSoul.SharpDX_Engine.Game
 
             // New RenderTargetView from the backbuffer
             Texture2D backBuffer = Texture2D.FromSwapChain<Texture2D>(swapChain, 0);
-            var renderView = new RenderTargetView(device, backBuffer);
+            RenderTargetView renderView = new RenderTargetView(device, backBuffer);
 
             Surface surface = backBuffer.QueryInterface<Surface>();
 
-            var d2dRenderTarget = new RenderTarget(d2dFactory, surface,
+            RenderTarget d2dRenderTarget = new RenderTarget(d2dFactory, surface,
                                                             new RenderTargetProperties(new SharpDX.Direct2D1.PixelFormat(Format.Unknown, AlphaMode.Premultiplied)));
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -63,13 +66,12 @@ namespace NekuSoul.SharpDX_Engine.Game
 
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
             Renderer _Renderer = new Renderer(d2dRenderTarget, _TextureManager);
-            List<DrawableObject> _DrawList = new List<DrawableObject>();
-            _DrawList.Add(new DrawableObject());
+            Scene _Scene = StartScene;
 
             #region Main loop
             RenderLoop.Run(form, () =>
             {
-                _Renderer.Draw(_DrawList);
+                _Renderer.Draw(_Scene.DrawableObjectList);
                 swapChain.Present(0, PresentFlags.None);
             });
             #endregion

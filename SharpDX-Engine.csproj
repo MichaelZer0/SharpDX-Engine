@@ -61,7 +61,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Instance.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\Scene.cs" />
     <Compile Include="Graphics\Renderer.cs" />
     <Compile Include="Graphics\TextureManager.cs" />
     <Compile Include="Objects\DrawableObject.cs" />
