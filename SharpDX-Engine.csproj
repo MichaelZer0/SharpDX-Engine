@@ -59,6 +59,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Libraries\SharpDX\Bin\Signed-net40\SharpDX.DXGI.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.RawInput">
+      <HintPath>..\..\..\..\..\Libraries\SharpDX\Bin\Signed-net40\SharpDX.RawInput.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX.XInput">
       <HintPath>..\..\..\..\..\Libraries\SharpDX\Bin\Signed-net40\SharpDX.XInput.dll</HintPath>
     </Reference>
@@ -74,6 +77,7 @@
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Objects\DrawableObject.cs" />
     <Compile Include="Utitities\Converter.cs" />
+    <Compile Include="Utitities\Definitions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -17,12 +17,14 @@ namespace NekuSoul.SharpDX_Engine
 {
     public class Game
     {
-        public static void Initialize(Scene StartScene,int Width,int Height)
+        public static RenderForm form = new RenderForm();
+
+        public static void Initialize(Scene StartScene, int Width, int Height)
         {
             GC.Collect();
 
             #region Initializing
-            RenderForm form = new RenderForm();
+            //RenderForm form = new RenderForm();
             form.Width = Width;
             form.Height = Height;
 
