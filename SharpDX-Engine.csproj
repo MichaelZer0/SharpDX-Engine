@@ -55,6 +55,9 @@
     <Reference Include="SharpDX.DirectInput">
       <HintPath>..\..\..\..\..\Libraries\SharpDX\Bin\Signed-net40\SharpDX.DirectInput.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.DirectSound">
+      <HintPath>..\..\..\..\..\Libraries\SharpDX\Bin\Signed-net40\SharpDX.DirectSound.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX.DXGI, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Libraries\SharpDX\Bin\Signed-net40\SharpDX.DXGI.dll</HintPath>
@@ -76,6 +79,7 @@
     <Compile Include="Graphics\TextureManager.cs" />
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Objects\DrawableObject.cs" />
+    <Compile Include="Sound\Sound.cs" />
     <Compile Include="Utitities\Converter.cs" />
     <Compile Include="Utitities\Definitions.cs" />
   </ItemGroup>
