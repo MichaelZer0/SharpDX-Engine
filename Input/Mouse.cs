@@ -14,18 +14,25 @@ namespace NekuSoul.SharpDX_Engine.Input
         MouseState _CurrentState;
         MouseState _LastState;
         Point _Point = new Point();
+        Game _Game;
 
-        public Mouse()
+        public Mouse(Game _Game)
         {
+            this._Game = _Game;
             _Mouse.Acquire();
             UpdateMouseState();
-            Game.form.Move += form_Move;
+            _Game.form.Move += form_Move;
             Cursor.Hide();
         }
 
         void form_Move(object sender, System.EventArgs e)
         {
-            _Point = new Point(Game.form.Location.X + (Game.form.Size.Width / 2), Game.form.Location.Y + (Game.form.Size.Height / 2));
+            UpdateMouseLock();
+        }
+
+        public void UpdateMouseLock()
+        {
+            _Point = new Point(_Game.form.Location.X + (_Game.form.Size.Width / 2), _Game.form.Location.Y + (_Game.form.Size.Height / 2));
         }
 
         public void UpdateMouseState()

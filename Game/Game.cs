@@ -12,14 +12,24 @@ using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
 using System;
+using System.Timers;
+using System.Threading;
+using Timer = System.Timers.Timer;
 
 namespace NekuSoul.SharpDX_Engine
 {
     public class Game
     {
-        public static RenderForm form = new RenderForm();
+        public Scene _Scene;
+        public Timer _Timer;
+        public Stopwatch _Stopwatch;
+        Renderer _Renderer;
+        SwapChain swapChain;
+        bool IsBusy;
+        bool AllowUpdate;
+        public RenderForm form = new RenderForm();
 
-        public static void Initialize(Scene StartScene, int Width, int Height)
+        public Game(int Width, int Height)
         {
             GC.Collect();
 
@@ -44,7 +54,6 @@ namespace NekuSoul.SharpDX_Engine
 
             // Create Device and SwapChain
             Device1 device;
-            SwapChain swapChain;
             Device1.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, desc, FeatureLevel.Level_10_0, out device, out swapChain);
 
             var d2dFactory = new SharpDX.Direct2D1.Factory();
@@ -64,42 +73,72 @@ namespace NekuSoul.SharpDX_Engine
 
             RenderTarget d2dRenderTarget = new RenderTarget(d2dFactory, surface,
                                                             new RenderTargetProperties(new SharpDX.Direct2D1.PixelFormat(Format.Unknown, AlphaMode.Premultiplied)));
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            _Stopwatch = new Stopwatch();
+            _Stopwatch.Start();
             #endregion
 
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
-            Renderer _Renderer = new Renderer(d2dRenderTarget, _TextureManager);
-            Scene _Scene = StartScene;
+            _Renderer = new Renderer(d2dRenderTarget, _TextureManager);
+            _Timer = new Timer(1);
+            _Timer.Elapsed += _Timer_Elapsed;
+            _Timer.Start();
+        }
 
-            #region Main loop
-            RenderLoop.Run(form, () =>
+        void UpdateScene()
+        {
+            if (_Scene != null)
             {
                 _Scene.Update();
                 foreach (DrawableObject _DrawableObjet in _Scene.DrawableObjectList)
                 {
                     _DrawableObjet.Update();
                 }
+            }
+        }
+
+        void DrawScene()
+        {
+            if (_Scene != null)
+            {
                 _Renderer.Draw(_Scene.DrawableObjectList);
                 swapChain.Present(0, PresentFlags.None);
-                if (stopwatch.ElapsedMilliseconds % 1000 == 0)
+            }
+        }
+
+        public void Run()
+        {
+            RenderLoop.Run(form, () =>
+            {
+                if (AllowUpdate)
                 {
-                    GC.Collect();
+                    UpdateScene();
+                    AllowUpdate = false;
+                    return;
                 }
+                DrawScene();
             });
-            #endregion
 
             #region Close
             // Release all resources
-            renderView.Dispose();
-            backBuffer.Dispose();
-            device.ClearState();
-            device.Flush();
-            device.Dispose();
-            device.Dispose();
-            swapChain.Dispose();
-            factory.Dispose();
+            //renderView.Dispose();
+            //backBuffer.Dispose();
+            //device.ClearState();
+            //device.Flush();
+            //device.Dispose();
+            //device.Dispose();
+            //swapChain.Dispose();
+            //factory.Dispose();
             #endregion
+        }
+
+        public void RunScene(Scene _Scene)
+        {
+            this._Scene = _Scene;
+        }
+
+        void _Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            AllowUpdate = true;
         }
     }
 }

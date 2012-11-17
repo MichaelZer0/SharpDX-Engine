@@ -7,13 +7,14 @@ namespace NekuSoul.SharpDX_Engine.Graphics
 {
     class Renderer
     {
-        RenderTarget _RenderTarget;
+        public RenderTarget _RenderTarget;
         TextureManager _TextureManager;
 
         public Renderer(RenderTarget _RenderTarget, TextureManager _TextureManager)
         {
             this._RenderTarget = _RenderTarget;
             this._TextureManager = _TextureManager;
+            _RenderTarget.AntialiasMode = AntialiasMode.Aliased;
         }
 
         public void Draw(List<DrawableObject> DrawList)
@@ -23,7 +24,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
             foreach (DrawableObject _DrawableObject in DrawList)
             {
                 _RenderTarget.DrawBitmap(
-                    _TextureManager.GetTexture(_DrawableObject.Texture),
+                _TextureManager.GetTexture(_DrawableObject.Texture),
                     Utitities.Converter.RectangleToRectangleF(_DrawableObject.Position),
                     1f,
                     BitmapInterpolationMode.NearestNeighbor
