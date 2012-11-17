@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 namespace NekuSoul.SharpDX_Engine.Graphics
 {
-    class Renderer
+    public class Renderer
     {
         public RenderTarget _RenderTarget;
+        public Color _ClearColor;
         TextureManager _TextureManager;
 
         public Renderer(RenderTarget _RenderTarget, TextureManager _TextureManager)
@@ -20,7 +21,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         public void Draw(List<DrawableObject> DrawList)
         {
             _RenderTarget.BeginDraw();
-            _RenderTarget.Clear(Color.Black);
+            _RenderTarget.Clear(_ClearColor);
             foreach (DrawableObject _DrawableObject in DrawList)
             {
                 _RenderTarget.DrawBitmap(

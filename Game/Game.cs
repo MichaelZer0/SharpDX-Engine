@@ -4,16 +4,14 @@ using SharpDX.Direct2D1;
 using SharpDX.Direct3D10;
 using SharpDX.DXGI;
 using SharpDX.Windows;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
+using System.Timers;
 using AlphaMode = SharpDX.Direct2D1.AlphaMode;
 using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
-using System;
-using System.Timers;
-using System.Threading;
 using Timer = System.Timers.Timer;
 
 namespace NekuSoul.SharpDX_Engine
@@ -22,10 +20,10 @@ namespace NekuSoul.SharpDX_Engine
     {
         public Scene _Scene;
         public Timer _Timer;
-        public Stopwatch _Stopwatch;
-        Renderer _Renderer;
+        //public Stopwatch _Stopwatch;
+        public Renderer _Renderer;
         SwapChain swapChain;
-        bool IsBusy;
+        Device1 device;
         bool AllowUpdate;
         public RenderForm form = new RenderForm();
 
@@ -33,7 +31,6 @@ namespace NekuSoul.SharpDX_Engine
         {
             GC.Collect();
 
-            #region Initializing
             //RenderForm form = new RenderForm();
             form.Width = Width;
             form.Height = Height;
@@ -53,13 +50,9 @@ namespace NekuSoul.SharpDX_Engine
             };
 
             // Create Device and SwapChain
-            Device1 device;
             Device1.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, desc, FeatureLevel.Level_10_0, out device, out swapChain);
 
             var d2dFactory = new SharpDX.Direct2D1.Factory();
-
-            int width = form.ClientSize.Width;
-            int height = form.ClientSize.Height;
 
             // Ignore all windows events
             Factory factory = swapChain.GetParent<Factory>();
@@ -73,15 +66,21 @@ namespace NekuSoul.SharpDX_Engine
 
             RenderTarget d2dRenderTarget = new RenderTarget(d2dFactory, surface,
                                                             new RenderTargetProperties(new SharpDX.Direct2D1.PixelFormat(Format.Unknown, AlphaMode.Premultiplied)));
-            _Stopwatch = new Stopwatch();
-            _Stopwatch.Start();
-            #endregion
 
+            form.SizeChanged += form_SizeChanged;
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
             _Renderer = new Renderer(d2dRenderTarget, _TextureManager);
             _Timer = new Timer(1);
             _Timer.Elapsed += _Timer_Elapsed;
             _Timer.Start();
+        }
+
+        void form_SizeChanged(object sender, EventArgs e)
+        {
+            ModeDescription MD = new ModeDescription(form.ClientSize.Width, form.ClientSize.Height,
+                                        new Rational(60, 1), Format.R8G8B8A8_UNorm);
+            swapChain.ResizeTarget(ref MD);
+            swapChain.ResizeBuffers(1, form.Width, form.Height, Format.A8_UNorm, SwapChainFlags.AllowModeSwitch);
         }
 
         void UpdateScene()
@@ -101,7 +100,6 @@ namespace NekuSoul.SharpDX_Engine
             if (_Scene != null)
             {
                 _Renderer.Draw(_Scene.DrawableObjectList);
-                swapChain.Present(0, PresentFlags.None);
             }
         }
 
@@ -112,10 +110,12 @@ namespace NekuSoul.SharpDX_Engine
                 if (AllowUpdate)
                 {
                     UpdateScene();
+                    DrawScene();
                     AllowUpdate = false;
                     return;
                 }
-                DrawScene();
+                swapChain.Present(0, PresentFlags.None);
+                swapChain.ContainingOutput.WaitForVerticalBlank();
             });
 
             #region Close

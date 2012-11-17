@@ -1,4 +1,5 @@
-﻿namespace NekuSoul.SharpDX_Engine.Objects
+﻿using NekuSoul.SharpDX_Engine.Graphics;
+namespace NekuSoul.SharpDX_Engine.Objects
 {
     public class Rectangle
     {
@@ -24,10 +25,10 @@
 
         public abstract void Update();
 
-        //public DrawableObject()
-        //{
-        //    Texture = "Default";
-        //    Position = new Rectangle(0f, 0f, 10f, 10f);
-        //}
+        public DrawableObject()
+        {
+            Texture = "Default";
+            Position = new Rectangle(0f, 0f, 32f, 32f);
+        }
     }
 }

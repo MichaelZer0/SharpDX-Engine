@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace NekuSoul.SharpDX_Engine.Graphics
 {
-    class TextureManager
+    public class TextureManager
     {
         Dictionary<string, Bitmap> TextureList = new Dictionary<string, Bitmap>();
         RenderTarget _RenderTarget;
