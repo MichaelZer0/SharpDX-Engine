@@ -13,6 +13,7 @@ using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
 using Timer = System.Timers.Timer;
+using NekuSoul.SharpDX_Engine.Input;
 
 namespace NekuSoul.SharpDX_Engine
 {
@@ -68,12 +69,24 @@ namespace NekuSoul.SharpDX_Engine
                                                             new RenderTargetProperties(new SharpDX.Direct2D1.PixelFormat(Format.Unknown, AlphaMode.Premultiplied)));
             
             form.SizeChanged += form_SizeChanged;
+            form.GotFocus += form_GotFocus;
+            form.LostFocus += form_LostFocus;
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
             //swapChain.IsFullScreen = true;
             _Renderer = new Renderer(d2dRenderTarget, _TextureManager);
             _Timer = new Timer(1);
             _Timer.Elapsed += _Timer_Elapsed;
             _Timer.Start();
+        }
+
+        void form_LostFocus(object sender, EventArgs e)
+        {
+            Mouse.FormHasFocus = false;
+        }
+
+        void form_GotFocus(object sender, EventArgs e)
+        {
+            Mouse.FormHasFocus = true;
         }
 
         void form_SizeChanged(object sender, EventArgs e)

@@ -8,6 +8,8 @@ namespace NekuSoul.SharpDX_Engine.Input
 {
     public class Mouse
     {
+        public static bool FormHasFocus = true;
+
         public bool LockMouse;
 
         SharpDX.DirectInput.Mouse _Mouse = new SharpDX.DirectInput.Mouse(new DirectInput());
@@ -39,7 +41,7 @@ namespace NekuSoul.SharpDX_Engine.Input
         {
             _LastState = _CurrentState;
             _CurrentState = _CurrentState = _Mouse.GetCurrentState();
-            if (LockMouse)
+            if (LockMouse && Mouse.FormHasFocus)
             {
                 Cursor.Position = _Point;
             }
