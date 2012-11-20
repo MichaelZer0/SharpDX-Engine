@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NekuSoul.SharpDX_Engine.Utitities
+﻿namespace NekuSoul.SharpDX_Engine.Utitities
 {
     public class Coordinate
     {

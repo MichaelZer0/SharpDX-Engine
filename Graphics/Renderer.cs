@@ -21,7 +21,6 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         public void Draw(List<DrawableObject> DrawList)
         {
             _RenderTarget.BeginDraw();
-            _RenderTarget.Clear(_ClearColor);
             foreach (DrawableObject _DrawableObject in DrawList)
             {
                 _RenderTarget.DrawBitmap(
@@ -31,6 +30,13 @@ namespace NekuSoul.SharpDX_Engine.Graphics
                     BitmapInterpolationMode.NearestNeighbor
                     );
             }
+            _RenderTarget.EndDraw();
+        }
+
+        public void Clear()
+        {
+            _RenderTarget.BeginDraw();
+            _RenderTarget.Clear(_ClearColor);
             _RenderTarget.EndDraw();
         }
     }

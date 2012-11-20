@@ -66,9 +66,10 @@ namespace NekuSoul.SharpDX_Engine
 
             RenderTarget d2dRenderTarget = new RenderTarget(d2dFactory, surface,
                                                             new RenderTargetProperties(new SharpDX.Direct2D1.PixelFormat(Format.Unknown, AlphaMode.Premultiplied)));
-
+            
             form.SizeChanged += form_SizeChanged;
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
+            //swapChain.IsFullScreen = true;
             _Renderer = new Renderer(d2dRenderTarget, _TextureManager);
             _Timer = new Timer(1);
             _Timer.Elapsed += _Timer_Elapsed;
@@ -77,10 +78,10 @@ namespace NekuSoul.SharpDX_Engine
 
         void form_SizeChanged(object sender, EventArgs e)
         {
-            ModeDescription MD = new ModeDescription(form.ClientSize.Width, form.ClientSize.Height,
-                                        new Rational(60, 1), Format.R8G8B8A8_UNorm);
-            swapChain.ResizeTarget(ref MD);
-            swapChain.ResizeBuffers(1, form.Width, form.Height, Format.A8_UNorm, SwapChainFlags.AllowModeSwitch);
+            //ModeDescription MD = new ModeDescription(form.ClientSize.Width, form.ClientSize.Height,
+            //                            new Rational(60, 1), Format.R8G8B8A8_UNorm);
+            //swapChain.ResizeTarget(ref MD);
+            //swapChain.ResizeBuffers(1, form.Width, form.Height, Format.A8_UNorm, SwapChainFlags.AllowModeSwitch);
         }
 
         void UpdateScene()
@@ -110,10 +111,10 @@ namespace NekuSoul.SharpDX_Engine
                 if (AllowUpdate)
                 {
                     UpdateScene();
-                    DrawScene();
                     AllowUpdate = false;
                     return;
                 }
+                DrawScene();
                 swapChain.Present(0, PresentFlags.None);
                 swapChain.ContainingOutput.WaitForVerticalBlank();
             });

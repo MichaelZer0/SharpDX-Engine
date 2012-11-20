@@ -1,4 +1,5 @@
 ﻿using NekuSoul.SharpDX_Engine.Graphics;
+
 namespace NekuSoul.SharpDX_Engine.Objects
 {
     public class Rectangle
@@ -15,6 +16,11 @@ namespace NekuSoul.SharpDX_Engine.Objects
             this.Y = Y;
             this.width = width;
             this.heigth = heigth;
+        }
+
+        public static bool Intersect(Rectangle A, Rectangle B)
+        {
+            return !((A.X > B.X + B.width || A.X + A.width < B.X) || (A.Y > B.Y + B.heigth || A.Y + A.heigth < B.Y));
         }
     }
 
