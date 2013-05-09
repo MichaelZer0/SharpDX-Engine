@@ -27,11 +27,19 @@ namespace NekuSoul.SharpDX_Engine.Input
             Cursor.Hide();
         }
 
+        /// <summary>
+        /// Sets new Lock-Position
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void form_Move(object sender, System.EventArgs e)
         {
             UpdateMouseLock();
         }
 
+        /// <summary>
+        /// Resets Mouse Position to simulate Mouse-Lock
+        /// </summary>
         public void UpdateMouseLock()
         {
             _Point = new Point(_Game.form.Location.X + (_Game.form.Size.Width / 2), _Game.form.Location.Y + (_Game.form.Size.Height / 2));
@@ -47,6 +55,10 @@ namespace NekuSoul.SharpDX_Engine.Input
             }
         }
 
+        /// <summary>
+        /// Returns current Mouse-Position
+        /// </summary>
+        /// <returns></returns>
         public Coordinate GetCurrentMousePosition()
         {
             return new Coordinate()
