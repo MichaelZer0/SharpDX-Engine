@@ -19,15 +19,20 @@ namespace NekuSoul.SharpDX_Engine
 {
     public class Game
     {
-        public Scene _Scene;
-        public Timer _Timer;
+        public Scene Scene;
+        public Timer Timer;
         //public Stopwatch _Stopwatch;
-        public Renderer _Renderer;
-        SwapChain swapChain;
-        Device1 device;
-        bool AllowUpdate;
-        public RenderForm form = new RenderForm();
+        public Renderer Renderer;
+        private SwapChain swapChain;
+        private Device1 device;
+        private bool AllowUpdate;
+        internal RenderForm form = new RenderForm();
 
+        /// <summary>
+        /// A Game powered by SharpDX
+        /// </summary>
+        /// <param name="Width">The width of the window</param>
+        /// <param name="Height">The height of the window</param>
         public Game(int Width, int Height)
         {
             GC.Collect();
@@ -73,10 +78,10 @@ namespace NekuSoul.SharpDX_Engine
             form.LostFocus += form_LostFocus;
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
             //swapChain.IsFullScreen = true;
-            _Renderer = new Renderer(d2dRenderTarget, _TextureManager);
-            _Timer = new Timer(1);
-            _Timer.Elapsed += _Timer_Elapsed;
-            _Timer.Start();
+            Renderer = new Renderer(d2dRenderTarget, _TextureManager);
+            Timer = new Timer(1);
+            Timer.Elapsed += _Timer_Elapsed;
+            Timer.Start();
         }
 
         void form_LostFocus(object sender, EventArgs e)
@@ -99,10 +104,10 @@ namespace NekuSoul.SharpDX_Engine
 
         void UpdateScene()
         {
-            if (_Scene != null)
+            if (Scene != null)
             {
-                _Scene.Update();
-                foreach (DrawableObject _DrawableObjet in _Scene.DrawableObjectList)
+                Scene.Update();
+                foreach (DrawableObject _DrawableObjet in Scene.DrawableObjectList)
                 {
                     _DrawableObjet.Update();
                 }
@@ -111,9 +116,9 @@ namespace NekuSoul.SharpDX_Engine
 
         void DrawScene()
         {
-            if (_Scene != null)
+            if (Scene != null)
             {
-                _Renderer.Draw(_Scene.DrawableObjectList);
+                Renderer.Draw(Scene.DrawableObjectList);
             }
         }
 
@@ -147,7 +152,7 @@ namespace NekuSoul.SharpDX_Engine
 
         public void RunScene(Scene _Scene)
         {
-            this._Scene = _Scene;
+            this.Scene = _Scene;
         }
 
         void _Timer_Elapsed(object sender, ElapsedEventArgs e)
