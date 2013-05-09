@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Programm.cs" />
+    <Compile Include="Scenes\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.png">

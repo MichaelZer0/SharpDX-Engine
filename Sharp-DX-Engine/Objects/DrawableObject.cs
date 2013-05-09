@@ -29,8 +29,6 @@ namespace NekuSoul.SharpDX_Engine.Objects
         public string Texture;
         public Rectangle Position;
 
-        public abstract void Update();
-
         public DrawableObject()
         {
             Texture = "Default";

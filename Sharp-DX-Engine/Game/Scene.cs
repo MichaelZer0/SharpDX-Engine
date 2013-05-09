@@ -5,8 +5,7 @@ namespace NekuSoul.SharpDX_Engine
 {
     public abstract class Scene
     {
-        public List<DrawableObject> DrawableObjectList = new List<DrawableObject>();
-
         public abstract void Update();
+        public abstract List<DrawableObject> Draw();
     }
 }

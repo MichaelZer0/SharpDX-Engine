@@ -1,17 +1,17 @@
-﻿using System;
+﻿using NekuSoul.SharpDX_Engine.Objects;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NekuSoul.SharpDX_Engine;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 {
     class MainMenu : SharpDX_Engine.Scene
     {
-
-
         public override void Update()
         {
+        }
+
+        public override List<DrawableObject> Draw()
+        {
+            return new List<DrawableObject>();
         }
     }
 }

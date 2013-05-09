@@ -72,7 +72,7 @@ namespace NekuSoul.SharpDX_Engine
 
             RenderTarget d2dRenderTarget = new RenderTarget(d2dFactory, surface,
                                                             new RenderTargetProperties(new SharpDX.Direct2D1.PixelFormat(Format.Unknown, AlphaMode.Premultiplied)));
-            
+
             form.SizeChanged += form_SizeChanged;
             form.GotFocus += form_GotFocus;
             form.LostFocus += form_LostFocus;
@@ -107,10 +107,6 @@ namespace NekuSoul.SharpDX_Engine
             if (Scene != null)
             {
                 Scene.Update();
-                foreach (DrawableObject _DrawableObjet in Scene.DrawableObjectList)
-                {
-                    _DrawableObjet.Update();
-                }
             }
         }
 
@@ -118,7 +114,7 @@ namespace NekuSoul.SharpDX_Engine
         {
             if (Scene != null)
             {
-                Renderer.Draw(Scene.DrawableObjectList);
+                Renderer.Draw(Scene.Draw());
             }
         }
 
