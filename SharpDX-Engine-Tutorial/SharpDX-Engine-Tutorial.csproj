@@ -48,6 +48,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Input\Cursor.cs" />
     <Compile Include="Programm.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
   </ItemGroup>

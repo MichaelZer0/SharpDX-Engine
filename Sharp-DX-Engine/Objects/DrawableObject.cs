@@ -1,4 +1,5 @@
-﻿using NekuSoul.SharpDX_Engine.Graphics;
+﻿using NekuSoul.SharpDX_Engine.Utitities;
+using NekuSoul.SharpDX_Engine.Graphics;
 
 namespace NekuSoul.SharpDX_Engine.Objects
 {
@@ -27,12 +28,14 @@ namespace NekuSoul.SharpDX_Engine.Objects
     public abstract class DrawableObject
     {
         public string Texture;
-        public Rectangle Position;
+        public Coordinate Position;
+        public Size Size;
 
         public DrawableObject()
         {
             Texture = "Default";
-            Position = new Rectangle(0f, 0f, 32f, 32f);
+            Position = new Coordinate(0f, 0f);
+            Size = new Size(32f, 32f);
         }
     }
 

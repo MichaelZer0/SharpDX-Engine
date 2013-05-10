@@ -93,12 +93,12 @@ namespace NekuSoul.SharpDX_Engine
 
         void form_LostFocus(object sender, EventArgs e)
         {
-            Mouse.FormHasFocus = false;
+            Input.Mouse.FormHasFocus = false;
         }
 
         void form_GotFocus(object sender, EventArgs e)
         {
-            Mouse.FormHasFocus = true;
+            Input.Mouse.FormHasFocus = true;
         }
 
         void form_SizeChanged(object sender, EventArgs e)

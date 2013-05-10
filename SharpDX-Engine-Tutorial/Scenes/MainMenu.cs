@@ -1,6 +1,7 @@
 ﻿using NekuSoul.SharpDX_Engine.Objects;
 using System.Collections.Generic;
 using NekuSoul.SharpDX_Engine.Input;
+using NekuSoul.SharpDX_Engine.Utitities;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 {
@@ -20,14 +21,16 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             MainMenuStart = new SimpleDrawableObject()
             {
                 Texture = "StartA",
-                Position = new Rectangle(50, 50, 100, 50)
+                Position = new Coordinate(50f, 50f),
+                Size = new Size(100f, 50f)
             };
             ObjectsToDraw.Add(MainMenuStart);
 
             MainMenuExit = new SimpleDrawableObject()
             {
                 Texture = "ExitA",
-                Position = new Rectangle(50, 110, 100, 50)
+                Position = new Coordinate(50f, 110f),
+                Size = new Size(100f, 50f)
             };
             ObjectsToDraw.Add(MainMenuExit);
         }
@@ -35,7 +38,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         //! This method is called 60 times per second and contains the logic for the scene.
         public override void Update()
         {
-            
+
         }
 
         //! This method is called to draw the scene and returns all objects that should get drawn.

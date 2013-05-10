@@ -25,7 +25,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
             {
                 _RenderTarget.DrawBitmap(
                 _TextureManager.GetTexture(_DrawableObject.Texture),
-                    Utitities.Converter.RectangleToRectangleF(_DrawableObject.Position),
+                    Utitities.Converter.DrawableObjecttoRectangleF(_DrawableObject),
                     1f,
                     BitmapInterpolationMode.NearestNeighbor
                     );
