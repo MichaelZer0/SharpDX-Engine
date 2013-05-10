@@ -69,6 +69,7 @@
     <Compile Include="Game\Scene.cs" />
     <Compile Include="Graphics\Renderer.cs" />
     <Compile Include="Graphics\TextureManager.cs" />
+    <Compile Include="Input\Input.cs" />
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Objects\DrawableObject.cs" />
     <Compile Include="Sound\Sound.cs" />

@@ -15,14 +15,21 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         public TextureManager(RenderTarget _RenderTarget)
         {
             this._RenderTarget = _RenderTarget;
-            LoadFromFile("Default");
+            TextureList.Add("Default", LoadFromFile("Default"));
         }
 
         public Bitmap GetTexture(string TextureName)
         {
             if (!TextureList.ContainsKey(TextureName))
             {
-                TextureList.Add(TextureName, LoadFromFile(TextureName));
+                try
+                {
+                    TextureList.Add(TextureName, LoadFromFile(TextureName));
+                }
+                catch
+                {
+                    TextureList.Add(TextureName, TextureList["Default"]);
+                }
             }
             return TextureList[TextureName];
         }

@@ -35,4 +35,9 @@ namespace NekuSoul.SharpDX_Engine.Objects
             Position = new Rectangle(0f, 0f, 32f, 32f);
         }
     }
+
+    public class SimpleDrawableObject : DrawableObject
+    {
+
+    }
 }

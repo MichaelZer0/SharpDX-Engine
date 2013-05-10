@@ -11,10 +11,8 @@ namespace NekuSoul.SharpDX_Engine_Tutorial
 
         static void Main()
         {
-            //! This starts the Game and makes the window visible.
-            Game.Run();
-            //! This changes the game's scene to the main-menu.
-            Game.RunScene(new MainMenu());
+            //! This starts the Game at the mainmenu and makes the window visible.
+            Game.Run(new MainMenu());
         }
     }
 }

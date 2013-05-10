@@ -1,11 +1,11 @@
 ﻿using NekuSoul.SharpDX_Engine.Graphics;
-using NekuSoul.SharpDX_Engine.Objects;
+using NekuSoul.SharpDX_Engine.Input;
 using SharpDX.Direct2D1;
 using SharpDX.Direct3D10;
 using SharpDX.DXGI;
 using SharpDX.Windows;
 using System;
-using System.Diagnostics;
+using System.Drawing;
 using System.Timers;
 using AlphaMode = SharpDX.Direct2D1.AlphaMode;
 using Device1 = SharpDX.Direct3D10.Device1;
@@ -13,7 +13,6 @@ using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
 using Timer = System.Timers.Timer;
-using NekuSoul.SharpDX_Engine.Input;
 
 namespace NekuSoul.SharpDX_Engine
 {
@@ -21,8 +20,9 @@ namespace NekuSoul.SharpDX_Engine
     {
         public Scene Scene;
         public Timer Timer;
-        //public Stopwatch _Stopwatch;
+        //x public Stopwatch _Stopwatch;
         public Renderer Renderer;
+        public InputManager Input;
         private SwapChain swapChain;
         private Device1 device;
         private bool AllowUpdate;
@@ -76,12 +76,19 @@ namespace NekuSoul.SharpDX_Engine
             form.SizeChanged += form_SizeChanged;
             form.GotFocus += form_GotFocus;
             form.LostFocus += form_LostFocus;
+            form.Move += form_Move;
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
             //swapChain.IsFullScreen = true;
             Renderer = new Renderer(d2dRenderTarget, _TextureManager);
             Timer = new Timer(1);
             Timer.Elapsed += _Timer_Elapsed;
             Timer.Start();
+            Input = new InputManager();
+        }
+
+        void form_Move(object sender, EventArgs e)
+        {
+            Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
         }
 
         void form_LostFocus(object sender, EventArgs e)
@@ -118,8 +125,9 @@ namespace NekuSoul.SharpDX_Engine
             }
         }
 
-        public void Run()
+        public void Run(Scene StartScene)
         {
+            Scene = StartScene;
             RenderLoop.Run(form, () =>
             {
                 if (AllowUpdate)
