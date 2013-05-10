@@ -20,11 +20,10 @@ namespace NekuSoul.SharpDX_Engine.Sound
                 AudioBytes = (int)stream.Length,
                 Flags = BufferFlags.EndOfStream
             };
-            stream.Close();
+            //stream.Close();
 
             SourceVoice sourceVoice = new SourceVoice(xaudio2, waveFormat, true);
-            // Adds a sample callback to check that they are working on source voices
-            sourceVoice.SubmitSourceBuffer(buffer, stream.DecodedPacketsInfo);
+            //sourceVoice.SubmitSourceBuffer(buffer, stream.DecodedPacketsInfo);
             sourceVoice.Start();
         }
     }
