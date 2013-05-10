@@ -15,7 +15,10 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Input
 
         public void UpdatePosition()
         {
+            //! Moves the Cursor according to the mouse-movement.
             Position += Programm.Game.Input.Mouse.GetCurrentMousePosition();
+
+            //! Cages the Cursor into the windows.
             if (Position.X < 0)
             {
                 Position.X = 0;

@@ -21,7 +21,6 @@ namespace NekuSoul.SharpDX_Engine.Sound
                 Flags = BufferFlags.EndOfStream
             };
             //stream.Close();
-
             SourceVoice sourceVoice = new SourceVoice(xaudio2, waveFormat, true);
             //sourceVoice.SubmitSourceBuffer(buffer, stream.DecodedPacketsInfo);
             sourceVoice.Start();
