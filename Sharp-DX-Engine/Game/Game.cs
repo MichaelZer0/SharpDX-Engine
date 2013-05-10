@@ -1,5 +1,6 @@
 ﻿using NekuSoul.SharpDX_Engine.Graphics;
 using NekuSoul.SharpDX_Engine.Input;
+using NekuSoul.SharpDX_Engine.Utitities;
 using SharpDX.Direct2D1;
 using SharpDX.Direct3D10;
 using SharpDX.DXGI;
@@ -7,6 +8,7 @@ using SharpDX.Windows;
 using System;
 using System.Drawing;
 using System.Timers;
+using System.Windows.Forms;
 using AlphaMode = SharpDX.Direct2D1.AlphaMode;
 using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
@@ -21,25 +23,26 @@ namespace NekuSoul.SharpDX_Engine
         public Scene Scene;
         public Timer Timer;
         //x public Stopwatch _Stopwatch;
-        public Renderer Renderer;
         public InputManager Input;
+        internal Renderer Renderer;
+        internal RenderForm form = new RenderForm();
         private SwapChain swapChain;
         private Device1 device;
         private bool AllowUpdate;
-        internal RenderForm form = new RenderForm();
 
         /// <summary>
         /// A Game powered by SharpDX
         /// </summary>
         /// <param name="Width">The width of the window</param>
         /// <param name="Height">The height of the window</param>
-        public Game(int Width, int Height)
+        public Game(NekuSoul.SharpDX_Engine.Utitities.Size Size)
         {
             GC.Collect();
 
             //RenderForm form = new RenderForm();
-            form.Width = Width;
-            form.Height = Height;
+            form.ClientSize = new System.Drawing.Size((int)Size.width, (int)Size.height);
+            form.MaximizeBox = false;
+            form.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             // SwapChain description
             SwapChainDescription desc = new SwapChainDescription()
@@ -144,15 +147,11 @@ namespace NekuSoul.SharpDX_Engine
             });
 
             #region Close
-            // Release all resources
-            //renderView.Dispose();
-            //backBuffer.Dispose();
+            //Release all resources
             //device.ClearState();
             //device.Flush();
             //device.Dispose();
-            //device.Dispose();
             //swapChain.Dispose();
-            //factory.Dispose();
             #endregion
         }
 
@@ -164,6 +163,11 @@ namespace NekuSoul.SharpDX_Engine
         void _Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             AllowUpdate = true;
+        }
+
+        public void Close()
+        {
+            form.Close();
         }
     }
 }

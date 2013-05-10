@@ -11,10 +11,10 @@ namespace NekuSoul.SharpDX_Engine.Input
         public bool FormHasFocus = true;
         public bool LockMouse = false;
 
-        SharpDX.DirectInput.Mouse _Mouse = new SharpDX.DirectInput.Mouse(new DirectInput());
-        MouseState CurrentState;
-        MouseState LastState;
         internal Point Point = new Point();
+        private SharpDX.DirectInput.Mouse _Mouse = new SharpDX.DirectInput.Mouse(new DirectInput());
+        private MouseState CurrentState;
+        private MouseState LastState;
 
         public Mouse()
         {
@@ -53,6 +53,29 @@ namespace NekuSoul.SharpDX_Engine.Input
                 X = LastState.X,
                 Y = LastState.Y
             };
+        }
+
+        public bool IsMouseDown()
+        {
+            return CurrentState.Buttons[0];
+        }
+
+        public bool IsMouseClickDown()
+        {
+            if (!LastState.Buttons[0])
+            {
+                return CurrentState.Buttons[0];
+            }
+            return false;
+        }
+
+        public bool IsMouseClickUp()
+        {
+            if (LastState.Buttons[0])
+            {
+                return !CurrentState.Buttons[0];
+            }
+            return false;
         }
     }
 }

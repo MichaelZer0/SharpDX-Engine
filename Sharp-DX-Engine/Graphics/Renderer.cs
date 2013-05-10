@@ -21,6 +21,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         public void Draw(List<DrawableObject> DrawList)
         {
             _RenderTarget.BeginDraw();
+            _RenderTarget.Clear(_ClearColor);
             foreach (DrawableObject _DrawableObject in DrawList)
             {
                 _RenderTarget.DrawBitmap(

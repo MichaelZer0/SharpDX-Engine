@@ -1,4 +1,6 @@
-﻿namespace NekuSoul.SharpDX_Engine.Utitities
+﻿using NekuSoul.SharpDX_Engine.Objects;
+
+namespace NekuSoul.SharpDX_Engine.Utitities
 {
     public class Coordinate
     {
@@ -12,6 +14,25 @@
         {
             this.X = X;
             this.Y = Y;
+        }
+
+        public static Coordinate operator +(Coordinate c1, Coordinate c2)
+        {
+            return new Coordinate(c1.X + c2.X, c1.Y + c2.Y);
+        }
+
+        public bool IsWithinRectangle(Rectangle Rectangle)
+        {
+            if ((X > Rectangle.Coordinate.X && Y > Rectangle.Coordinate.Y) && (X < Rectangle.Coordinate.X + Rectangle.Size.width && Y < Rectangle.Coordinate.Y + Rectangle.Size.height))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsWithinDrawableObject(DrawableObject DrawableObject)
+        {
+            return IsWithinRectangle(new Rectangle(DrawableObject.Position, DrawableObject.Size));
         }
     }
 
@@ -27,6 +48,21 @@
         {
             this.width = width;
             this.height = height;
+        }
+    }
+
+    public class Rectangle
+    {
+        public Coordinate Coordinate = new Coordinate();
+        public Size Size = new Size();
+
+        public Rectangle()
+        { }
+
+        public Rectangle(Coordinate Coordinate, Size Size)
+        {
+            this.Coordinate = Coordinate;
+            this.Size = Size;
         }
     }
 }
