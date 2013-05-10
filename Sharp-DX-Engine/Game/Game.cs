@@ -127,11 +127,13 @@ namespace NekuSoul.SharpDX_Engine
 
         public void Run(Scene StartScene)
         {
+            Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
             Scene = StartScene;
             RenderLoop.Run(form, () =>
             {
                 if (AllowUpdate)
                 {
+                    Input.Mouse.UpdateMouseState();
                     UpdateScene();
                     AllowUpdate = false;
                     return;
