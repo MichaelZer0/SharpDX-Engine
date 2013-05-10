@@ -49,6 +49,10 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             if (Cursor.Position.IsWithinDrawableObject(MainMenuStart))
             {
                 MainMenuStart.Texture = "StartB";
+                if (Programm.Game.Input.Mouse.IsMouseClickUp())
+                {
+
+                }
             }
             else
             {
