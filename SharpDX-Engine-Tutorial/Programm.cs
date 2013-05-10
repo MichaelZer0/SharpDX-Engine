@@ -6,10 +6,11 @@ namespace NekuSoul.SharpDX_Engine_Tutorial
 {
     class Programm
     {
+        //! This creates a new Game that can be accessed from everywhere.
+        static Game Game = new Game(800, 600);
+
         static void Main()
         {
-            //! This creates a new Game. 
-            Game Game = new Game(800, 600);
             //! This starts the Game and makes the window visible.
             Game.Run();
             //! This changes the game's scene to the main-menu.

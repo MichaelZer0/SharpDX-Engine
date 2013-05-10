@@ -42,23 +42,23 @@
   <ItemGroup>
     <Reference Include="SharpDX, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.dll</HintPath>
+      <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct2D1">
-      <HintPath>..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.Direct2D1.dll</HintPath>
+      <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.Direct2D1.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D10">
-      <HintPath>..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.Direct3D10.dll</HintPath>
+      <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.Direct3D10.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DirectInput">
-      <HintPath>..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.DirectInput.dll</HintPath>
+      <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.DirectInput.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DirectSound">
-      <HintPath>..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.DirectSound.dll</HintPath>
+      <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.DirectSound.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DXGI, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.DXGI.dll</HintPath>
+      <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -74,6 +74,12 @@
     <Compile Include="Sound\Sound.cs" />
     <Compile Include="Utitities\Converter.cs" />
     <Compile Include="Utitities\Definitions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Ressources\Default.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

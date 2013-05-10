@@ -30,7 +30,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         private Bitmap LoadFromFile(string file)
         {
             // Loads from file using System.Drawing.Image
-            using (var bitmap = (System.Drawing.Bitmap)System.Drawing.Image.FromFile(file + ".png"))
+            using (var bitmap = (System.Drawing.Bitmap)System.Drawing.Image.FromFile("Ressources\\" + file + ".png"))
             {
                 var sourceArea = new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height);
                 var bitmapProperties = new BitmapProperties(new SharpDX.Direct2D1.PixelFormat(Format.R8G8B8A8_UNorm, AlphaMode.Premultiplied));
