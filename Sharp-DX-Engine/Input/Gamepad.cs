@@ -11,13 +11,16 @@ namespace NekuSoul.SharpDX_Engine.Input
 
         public Gamepad()
         {
-            Controller = new SharpDX.XInput.Controller(UserIndex.Any);
+            Controller = new SharpDX.XInput.Controller(UserIndex.One);
         }
 
         public void UpdateGamepadState()
         {
-            LastState = CurrentState;
-            CurrentState = Controller.GetState();
+            if (Controller.IsConnected)
+            {
+                LastState = CurrentState;
+                CurrentState = Controller.GetState();
+            }
         }
 
         /// <summary>

@@ -13,21 +13,40 @@ namespace NekuSoul.SharpDX_Engine_Tutorial
 
         static void Main()
         {
-            //! If any errors occur, don't display the default Windows-Error-Message, but a custom MessageBox
-            try
+            //! Turn on debug mode if compiled as debug
+            bool debug = false;
+            #if DEBUG
+            debug = true;
+            #endif
+
+            if (debug)
             {
-                //! This creates a new Game that can be accessed from everywhere.
-                Game = new Game(Size);
-                //! This locks the mouse position so that the mouse can't leave the window.
-                Game.Input.Mouse.LockMouse = true;
-                //! This starts the Game at the mainmenu and makes the window visible.
-                Game.Run(new MainMenu());
+                //! Just run the game in debug mode
+                StartGame();
             }
-            catch (Exception e)
+            else
             {
-                //! Writes the default Errormessage in the MessageBox 
-                System.Windows.Forms.MessageBox.Show(e.Message, "BOOM! ERROR!");
+                //! If any errors occur, don't display the default Windows-Error-Message, but a custom MessageBox
+                try
+                {
+                    StartGame();
+                }
+                catch (Exception e)
+                {
+                    //! Writes the default Errormessage in the MessageBox 
+                    System.Windows.Forms.MessageBox.Show(e.Message, "BOOM! ERROR!");
+                }
             }
+        }
+
+        static void StartGame()
+        {
+            //! This creates a new Game that can be accessed from everywhere.
+            Game = new Game(Size);
+            //! This locks the mouse position so that the mouse can't leave the window.
+            Game.Input.Mouse.LockMouse = true;
+            //! This starts the Game at the mainmenu and makes the window visible.
+            Game.Run(new MainMenu());
         }
     }
 }
