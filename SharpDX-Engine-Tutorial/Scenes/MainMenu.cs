@@ -45,6 +45,11 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         //! This method is called 60 times per second and contains the logic for the scene.
         public override void Update()
         {
+            if (Programm.Game.Input.Gamepad.CheckGamepadButton(Gamepad.GamepadButton.A))
+            {
+                Programm.Game.Close();
+            }
+
             Cursor.UpdatePosition();
             if (Cursor.Position.IsWithinDrawableObject(MainMenuStart))
             {

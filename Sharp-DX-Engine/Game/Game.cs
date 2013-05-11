@@ -139,6 +139,7 @@ namespace NekuSoul.SharpDX_Engine
                 if (AllowUpdate)
                 {
                     Input.Mouse.UpdateMouseState();
+                    Input.Gamepad.UpdateGamepadState();
                     UpdateScene();
                     AllowUpdate = false;
                     return;

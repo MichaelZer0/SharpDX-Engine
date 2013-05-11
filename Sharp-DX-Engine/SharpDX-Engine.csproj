@@ -60,6 +60,9 @@
     <Reference Include="SharpDX.XAudio2">
       <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.XAudio2.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.XInput">
+      <HintPath>..\..\..\Libraries\SharpDX\Bin\Standard-net40\SharpDX.XInput.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -69,6 +72,7 @@
     <Compile Include="Game\Scene.cs" />
     <Compile Include="Graphics\Renderer.cs" />
     <Compile Include="Graphics\TextureManager.cs" />
+    <Compile Include="Input\Gamepad.cs" />
     <Compile Include="Input\Input.cs" />
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Objects\DrawableObject.cs" />
