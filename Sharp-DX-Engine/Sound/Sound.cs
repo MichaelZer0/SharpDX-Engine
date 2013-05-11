@@ -8,22 +8,38 @@ namespace NekuSoul.SharpDX_Engine.Sound
 {
     public class Sound
     {
+        XAudio2 xaudio2;
+        MasteringVoice masteringVoice;
+        SourceVoice sourceVoice;
+        AudioBuffer buffer;
+
         public Sound()
         {
-            XAudio2 xaudio2 = new XAudio2();
-            MasteringVoice masteringVoice = new MasteringVoice(xaudio2);
+            xaudio2 = new XAudio2();
+            masteringVoice = new MasteringVoice(xaudio2);
             SoundStream stream = new SoundStream(File.OpenRead(@"C:\ergon.wav"));
-            WaveFormat waveFormat = stream.Format;
-            AudioBuffer buffer = new AudioBuffer
+            buffer = new AudioBuffer
             {
                 Stream = stream.ToDataStream(),
                 AudioBytes = (int)stream.Length,
                 Flags = BufferFlags.EndOfStream
             };
-            //stream.Close();
-            SourceVoice sourceVoice = new SourceVoice(xaudio2, waveFormat, true);
-            //sourceVoice.SubmitSourceBuffer(buffer, stream.DecodedPacketsInfo);
+            stream.Close();
+            sourceVoice = new SourceVoice(xaudio2, stream.Format, true);
+            sourceVoice.SubmitSourceBuffer(buffer, stream.DecodedPacketsInfo);
             sourceVoice.Start();
+        }
+
+        ~Sound()
+        {
+            masteringVoice.DestroyVoice();
+            masteringVoice.Dispose();
+            masteringVoice.Dispose();
+            sourceVoice.Stop();
+            sourceVoice.DestroyVoice();
+            sourceVoice.Dispose();
+            buffer.Stream.Dispose();
+            xaudio2.Dispose();
         }
     }
 }
