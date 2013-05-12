@@ -29,16 +29,20 @@ namespace NekuSoul.SharpDX_Engine.Input
         /// <returns></returns>
         public bool CheckGamepadButton(GamepadButton Button)
         {
-            GamepadButtonFlags CheckButton = GamepadButtonFlags.None;
-            switch (Button)
+            if (Controller.IsConnected)
             {
-                case GamepadButton.A:
-                    {
-                        CheckButton = GamepadButtonFlags.A;
-                        break;
-                    }
+                GamepadButtonFlags CheckButton = GamepadButtonFlags.None;
+                switch (Button)
+                {
+                    case GamepadButton.A:
+                        {
+                            CheckButton = GamepadButtonFlags.A;
+                            break;
+                        }
+                }
+                return Controller.GetState().Gamepad.Buttons == CheckButton;
             }
-            return Controller.GetState().Gamepad.Buttons == CheckButton;
+            return false;
         }
 
         public enum GamepadButton

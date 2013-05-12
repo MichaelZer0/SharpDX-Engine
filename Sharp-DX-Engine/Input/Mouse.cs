@@ -55,12 +55,12 @@ namespace NekuSoul.SharpDX_Engine.Input
             };
         }
 
-        public bool IsMouseDown()
+        public bool CheckLeftMouseDown()
         {
             return CurrentState.Buttons[0];
         }
 
-        public bool IsMouseClickDown()
+        public bool CheckMouseLeftClickDown()
         {
             if (!LastState.Buttons[0])
             {
@@ -69,11 +69,34 @@ namespace NekuSoul.SharpDX_Engine.Input
             return false;
         }
 
-        public bool IsMouseClickUp()
+        public bool CheckLeftMouseClickUp()
         {
             if (LastState.Buttons[0])
             {
                 return !CurrentState.Buttons[0];
+            }
+            return false;
+        }
+
+        public bool CheckMouseRightDown()
+        {
+            return CurrentState.Buttons[1];
+        }
+
+        public bool CheckMouseRightClickDown()
+        {
+            if (!LastState.Buttons[1])
+            {
+                return CurrentState.Buttons[1];
+            }
+            return false;
+        }
+
+        public bool CheckMouseRightClickUp()
+        {
+            if (LastState.Buttons[1])
+            {
+                return !CurrentState.Buttons[1];
             }
             return false;
         }

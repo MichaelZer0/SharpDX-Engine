@@ -29,12 +29,14 @@ namespace NekuSoul.SharpDX_Engine.Objects
     {
         public string Texture;
         public Coordinate Position;
+        public Coordinate Offset;
         public Size Size;
 
         public DrawableObject()
         {
             Texture = "Default";
             Position = new Coordinate(0f, 0f);
+            Offset = new Coordinate(0f, 0f);
             Size = new Size(32f, 32f);
         }
     }

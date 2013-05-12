@@ -79,6 +79,7 @@
     <Compile Include="Sound\Sound.cs" />
     <Compile Include="Utitities\Converter.cs" />
     <Compile Include="Utitities\Definitions.cs" />
+    <Compile Include="Utitities\Helper.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

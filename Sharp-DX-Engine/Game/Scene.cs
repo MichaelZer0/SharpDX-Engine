@@ -1,11 +1,12 @@
-﻿using NekuSoul.SharpDX_Engine.Objects;
+﻿using NekuSoul.SharpDX_Engine.Graphics;
+using NekuSoul.SharpDX_Engine.Objects;
 using System.Collections.Generic;
 
 namespace NekuSoul.SharpDX_Engine
 {
-    public abstract class Scene
+    public interface Scene
     {
-        public abstract void Update();
-        public abstract List<DrawableObject> Draw();
+        void Update();
+        void Draw(RenderHelper Renderer);
     }
 }

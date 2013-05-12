@@ -126,7 +126,7 @@ namespace NekuSoul.SharpDX_Engine
         {
             if (Scene != null)
             {
-                Renderer.Draw(Scene.Draw());
+                Renderer.Draw(Scene);
             }
         }
 
@@ -171,6 +171,11 @@ namespace NekuSoul.SharpDX_Engine
         public void Close()
         {
             form.Close();
+        }
+
+        public void ShowMessageBox(string Caption, string Text)
+        {
+            MessageBox.Show(Text, Caption);
         }
     }
 }

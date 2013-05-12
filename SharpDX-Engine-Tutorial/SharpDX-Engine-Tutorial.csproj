@@ -46,11 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Input\Cursor.cs" />
+    <Compile Include="Objects\Ingame\Unit.cs" />
     <Compile Include="Programm.cs" />
+    <Compile Include="Scenes\Ingame.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +59,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressources\ExitA.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressources\ExitB.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -67,6 +68,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressources\StartB.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressources\Unit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
