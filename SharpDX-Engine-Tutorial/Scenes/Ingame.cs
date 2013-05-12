@@ -32,6 +32,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
             if (Programm.Game.Input.Mouse.CheckLeftMouseClickUp())
             {
+                Units.Add(new Unit(Units[Units.Count - 1]));
             }
 
             if (Programm.Game.Input.Mouse.CheckMouseRightClickUp())
@@ -39,7 +40,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 switch (AImode)
                 {
                     case 1:
-                        Units.Add(new Unit(Units[Units.Count - 1]));
+                        AImode = 2;
                         break;
                     case 2:
                         FirstUnit.Target = Units[Units.Count - 1];
@@ -47,7 +48,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                         break;
                     case 3:
                         FirstUnit.Target = Cursor;
-                        AImode = 2;
+                        AImode = 1;
                         break;
                 }
             }

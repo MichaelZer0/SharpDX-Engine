@@ -22,8 +22,8 @@ namespace NekuSoul.SharpDX_Engine
     {
         public Scene Scene;
         public Timer Timer;
-        public Sound.Sound Sound;
-        //x public Stopwatch _Stopwatch;
+        // Under Construction
+        //x public Sound.Sound Sound;
         public InputManager Input;
         internal Renderer Renderer;
         internal RenderForm form = new RenderForm();
