@@ -11,7 +11,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial
         //! This is static because it allows it to be accessed from everywhere.
         public static Game Game;
         //! Defines the Size of the Window
-        public static Size Size = new Size(800, 600);
+        public static Size Size = new Size(1280, 720);
 
         static void Main()
         {
@@ -30,7 +30,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial
                 catch (Exception e)
                 {
                     //! Writes the default Errormessage in the MessageBox
-                    Programm.Game.ShowMessageBox("BOOM! ERROR!", e.Message);
+                    Program.Game.ShowMessageBox("BOOM! ERROR!", e.Message);
                 }
             }
             #endif

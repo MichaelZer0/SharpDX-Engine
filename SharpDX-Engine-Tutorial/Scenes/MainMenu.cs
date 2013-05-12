@@ -23,16 +23,18 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             MainMenuStart = new SimpleDrawableObject()
             {
                 Texture = "StartA",
-                Position = new Coordinate(50f, 50f),
                 Size = new Size(100f, 50f)
             };
+            MainMenuStart.Position = new Coordinate((Program.Size.width / 2) - (MainMenuStart.Size.width / 2), (Program.Size.height / 2) - (MainMenuStart.Size.height));
+
 
             MainMenuExit = new SimpleDrawableObject()
             {
                 Texture = "ExitA",
-                Position = new Coordinate(50f, 110f),
                 Size = new Size(100f, 50f)
             };
+            MainMenuExit.Position = new Coordinate((Program.Size.width / 2) - (MainMenuExit.Size.width / 2), (Program.Size.height / 2) + (MainMenuExit.Size.height));
+
 
             //! Creates a Cursor.
             Cursor = new Cursor();
