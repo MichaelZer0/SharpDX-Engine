@@ -1,45 +1,55 @@
-﻿using SharpDX;
-using SharpDX.Multimedia;
+﻿using SharpDX.Multimedia;
 using SharpDX.XAudio2;
+using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 
 namespace NekuSoul.SharpDX_Engine.Sound
 {
     public class Sound
     {
-        XAudio2 xaudio2;
-        MasteringVoice masteringVoice;
-        SourceVoice sourceVoice;
-        AudioBuffer buffer;
+        private XAudio2 xaudio2;
+        private MasteringVoice masteringVoice;
+        private Dictionary<string, CachedSound> SoundManager;
 
         public Sound()
         {
             xaudio2 = new XAudio2();
             masteringVoice = new MasteringVoice(xaudio2);
-            SoundStream stream = new SoundStream(File.OpenRead(@"C:\ergon.wav"));
-            buffer = new AudioBuffer
+            SoundManager = new Dictionary<string, CachedSound>();
+        }
+
+        public void PlaySound(string FileName)
+        {
+            if (!SoundManager.ContainsKey(FileName))
             {
-                Stream = stream.ToDataStream(),
-                AudioBytes = (int)stream.Length,
-                Flags = BufferFlags.EndOfStream
-            };
-            stream.Close();
-            sourceVoice = new SourceVoice(xaudio2, stream.Format, true);
-            sourceVoice.SubmitSourceBuffer(buffer, stream.DecodedPacketsInfo);
+                SoundManager.Add(FileName, new CachedSound(FileName));
+            }
+            SourceVoice sourceVoice = new SourceVoice(xaudio2, SoundManager[FileName].SoundStream.Format, true);
+            sourceVoice.SubmitSourceBuffer(SoundManager[FileName].Buffer, SoundManager[FileName].SoundStream.DecodedPacketsInfo);
             sourceVoice.Start();
         }
 
-        ~Sound()
+        public void ClearSoundCache()
         {
-            masteringVoice.DestroyVoice();
-            masteringVoice.Dispose();
-            masteringVoice.Dispose();
-            sourceVoice.Stop();
-            sourceVoice.DestroyVoice();
-            sourceVoice.Dispose();
-            buffer.Stream.Dispose();
-            xaudio2.Dispose();
+            SoundManager.Clear();
+        }
+    }
+
+    class CachedSound
+    {
+        public SoundStream SoundStream;
+        public AudioBuffer Buffer;
+
+        public CachedSound(string FileName)
+        {
+            SoundStream = new SoundStream(File.OpenRead("Ressources\\" + FileName + ".wav"));
+            Buffer = new AudioBuffer
+            {
+                Stream = SoundStream.ToDataStream(),
+                AudioBytes = (int)SoundStream.Length,
+                Flags = BufferFlags.EndOfStream
+            };
+            SoundStream.Close();
         }
     }
 }

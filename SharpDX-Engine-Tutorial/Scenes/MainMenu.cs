@@ -57,6 +57,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 {
                     //! Switches from the MainMenu to Ingame.
                     Program.Game.RunScene(new Ingame());
+                    Program.Game.Sound.PlaySound("Select");
                 }
             }
             else

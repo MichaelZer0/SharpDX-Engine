@@ -23,7 +23,7 @@ namespace NekuSoul.SharpDX_Engine
         public Scene Scene;
         public Timer Timer;
         // Under Construction
-        //x public Sound.Sound Sound;
+       public Sound.Sound Sound;
         public InputManager Input;
         internal Renderer Renderer;
         internal RenderForm form = new RenderForm();
@@ -88,7 +88,7 @@ namespace NekuSoul.SharpDX_Engine
             Timer.Elapsed += _Timer_Elapsed;
             Timer.Start();
             Input = new InputManager();
-            //x Sound = new Sound.Sound();
+            Sound = new Sound.Sound();
         }
 
         void form_Move(object sender, EventArgs e)

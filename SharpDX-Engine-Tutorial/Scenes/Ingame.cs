@@ -54,6 +54,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             //! Switches to the next AI behaviour on Right-Click.
             if (Program.Game.Input.Mouse.CheckMouseRightClickUp())
             {
+                Program.Game.Sound.PlaySound("Select");
                 switch (AImode)
                 {
                     case 1:
