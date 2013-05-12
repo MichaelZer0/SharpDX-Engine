@@ -3,7 +3,6 @@ using NekuSoul.SharpDX_Engine.Graphics;
 using NekuSoul.SharpDX_Engine.Objects;
 using NekuSoul.SharpDX_Engine.Utitities;
 using NekuSoul.SharpDX_Engine_Tutorial.Input;
-using System.Collections.Generic;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 {
@@ -20,6 +19,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         //! The Scenenery is built here.
         public MainMenu()
         {
+            //! Creates the Start- and Exit-Button.
             MainMenuStart = new SimpleDrawableObject()
             {
                 Texture = "StartA",
@@ -34,18 +34,26 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 Size = new Size(100f, 50f)
             };
 
+            //! Creates a Cursor.
             Cursor = new Cursor();
         }
 
         //! This method is called 60 times per second and contains the logic for the scene.
         public void Update()
         {
+            //! Updates the Cursorposition.
             Cursor.UpdatePosition();
+
+            //! When the Mouse hovers over a button, make it react.
             if (Cursor.Position.IsWithinDrawableObject(MainMenuStart))
             {
+                //! Swaps out the Texture.
                 MainMenuStart.Texture = "StartB";
+
+                //! Checks if the Left Mouse-Button has been clicked.
                 if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
                 {
+                    //! Switches from the MainMenu to Ingame.
                     Program.Game.RunScene(new Ingame());
                 }
             }
@@ -58,6 +66,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 MainMenuExit.Texture = "ExitB";
                 if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
                 {
+                    //! Closes the Game
                     Program.Game.Close();
                 }
             }
@@ -69,6 +78,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
         public void Draw(RenderHelper Renderer)
         {
+            //! Draws all the Objects!
             Renderer.DrawObject(MainMenuStart);
             Renderer.DrawObject(MainMenuExit);
             Renderer.DrawObject(Cursor);

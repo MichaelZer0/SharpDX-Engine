@@ -15,18 +15,12 @@ namespace NekuSoul.SharpDX_Engine_Tutorial
 
         static void Main()
         {
-            //! Turn on debug mode if compiled as debug
-            bool debug = false;
             #if DEBUG
-            debug = true;
-            #endif
-
-            if (debug)
             {
                 //! Just run the game in debug mode
                 StartGame();
             }
-            else
+            #else
             {
                 //! If any errors occur, don't display the default Windows-Error-Message, but a custom MessageBox
                 try
@@ -35,10 +29,11 @@ namespace NekuSoul.SharpDX_Engine_Tutorial
                 }
                 catch (Exception e)
                 {
-                    //! Writes the default Errormessage in the MessageBox 
-                    Program.Game.ShowMessageBox("BOOM! ERROR!", e.Message);
+                    //! Writes the default Errormessage in the MessageBox
+                    Programm.Game.ShowMessageBox("BOOM! ERROR!", e.Message);
                 }
             }
+            #endif
         }
 
         static void StartGame()
