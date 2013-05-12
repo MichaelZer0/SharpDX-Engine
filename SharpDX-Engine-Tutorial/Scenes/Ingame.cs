@@ -3,6 +3,7 @@ using NekuSoul.SharpDX_Engine.Graphics;
 using NekuSoul.SharpDX_Engine.Objects;
 using NekuSoul.SharpDX_Engine_Tutorial.Input;
 using NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame;
+using NekuSoul.SharpDX_Engine.Utitities;
 using System.Collections.Generic;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
@@ -52,7 +53,25 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                         AImode = 3;
                         break;
                     case 3:
-                        FirstUnit.Target = Cursor;
+                        foreach (Unit U in Units)
+                        {
+                            int NewTarget = Helper.Random.Next(Units.Count - 1);
+                            U.Target = Units[NewTarget];
+                        }
+                        AImode = 4;
+                        break;
+                    case 4:
+                        foreach (Unit U in Units)
+                        {
+                            U.Target = Cursor;
+                        }
+                        AImode = 5;
+                        break;
+                    case 5:
+                        for (int i = 1; i < Units.Count; i++)
+                        {
+                            Units[i].Target = Units[i - 1];
+                        }
                         AImode = 1;
                         break;
                 }
@@ -60,20 +79,9 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
             foreach (Unit U in Units)
             {
-                if (AImode == 1 || AImode == 3)
+                if (AImode != 1 && AImode != 5)
                 {
-                    U.MoveToTarget();
-                    foreach (Unit U2 in Units)
-                    {
-                        if (U != U2 && U2 != U.Target)
-                        {
-                            U.MoveFromSpecific(U2, 5);
-                        }
-                    }
-                    if (AImode==3)
-                    {
-                        U.MoveFromSpecific(Cursor, 50);
-                    }
+                    U.MoveFromSpecific(Cursor, 50);
                 }
                 if (AImode == 2)
                 {
@@ -86,7 +94,26 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                         U.MoveFromSpecific(Cursor, 50);
                     }
                 }
+                else
+                {
+                    U.MoveToTarget();
+                    foreach (Unit U2 in Units)
+                    {
+                        if (U != U2 && U2 != U.Target)
+                        {
+                            if (AImode == 5)
+                            {
+                                U.MoveFromSpecific(U2, 15);
+                            }
+                            else
+                            {
+                                U.MoveFromSpecific(U2, 5);
+                            }
+                        }
+                    }
+                }
             }
+
         }
 
         public void Draw(RenderHelper Renderer)
