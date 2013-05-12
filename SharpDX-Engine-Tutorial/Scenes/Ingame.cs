@@ -14,7 +14,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
         List<Unit> Units;
         Unit FirstUnit;
-        bool FollowCursor;
+        int AImode;
 
         //! The Scenenery is built here.
         public Ingame()
@@ -23,7 +23,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             Units = new List<Unit>();
             FirstUnit = new Unit(Cursor);
             Units.Add(FirstUnit);
-            FollowCursor = true;
+            AImode = 1;
         }
 
         public void Update()
@@ -32,32 +32,49 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
             if (Programm.Game.Input.Mouse.CheckLeftMouseClickUp())
             {
-                Units.Add(new Unit(Units[Units.Count - 1]));
             }
 
             if (Programm.Game.Input.Mouse.CheckMouseRightClickUp())
             {
-                if (FollowCursor)
+                switch (AImode)
                 {
-                    //FirstUnit.Target = Units[Units.Count - 1];
-                    FollowCursor = false;
-                }
-                else
-                {
-                    //FirstUnit.Target = Cursor;
-                    FollowCursor = true;
+                    case 1:
+                        Units.Add(new Unit(Units[Units.Count - 1]));
+                        break;
+                    case 2:
+                        FirstUnit.Target = Units[Units.Count - 1];
+                        AImode = 3;
+                        break;
+                    case 3:
+                        FirstUnit.Target = Cursor;
+                        AImode = 2;
+                        break;
                 }
             }
 
             foreach (Unit U in Units)
             {
-                if (FollowCursor)
+                if (AImode == 1 || AImode == 3)
                 {
                     U.MoveToTarget();
+                    foreach (Unit U2 in Units)
+                    {
+                        if (U != U2 && U2 != U.Target)
+                        {
+                            U.MoveFromSppecific(U2, 5);
+                        }
+                    }
                 }
-                else
+                if (AImode == 2)
                 {
-                    U.MoveFromTarget();
+                    foreach (Unit U2 in Units)
+                    {
+                        if (U != U2)
+                        {
+                            U.MoveFromSppecific(U2, 50);
+                        }
+                        U.MoveFromSppecific(Cursor, 50);
+                    }
                 }
             }
         }

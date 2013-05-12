@@ -1,6 +1,7 @@
 ﻿using NekuSoul.SharpDX_Engine.Objects;
 using NekuSoul.SharpDX_Engine.Utitities;
 using System;
+using System.Collections.Generic;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
 {
@@ -26,9 +27,9 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
             }
         }
 
-        public void MoveFromTarget()
+        public void MoveFromSppecific(DrawableObject Target, int Distance)
         {
-            if (Math.Sqrt(Math.Pow(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), 2) + Math.Pow(((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)), 2)) <100)
+            if (Math.Sqrt(Math.Pow(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), 2) + Math.Pow(((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)), 2)) < Distance)
             {
                 Position.X -= 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
                 Position.Y -= 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
