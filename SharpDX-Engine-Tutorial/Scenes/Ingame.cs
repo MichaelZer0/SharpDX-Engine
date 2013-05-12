@@ -31,17 +31,17 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         {
             Cursor.UpdatePosition();
 
-            if (Programm.Game.Input.Mouse.CheckLeftMouseDown() && Programm.Game.Input.Mouse.CheckMouseRightDown())
+            if (Program.Game.Input.Mouse.CheckLeftMouseDown() && Program.Game.Input.Mouse.CheckMouseRightDown())
             {
-                Programm.Game.RunScene(new MainMenu());
+                Program.Game.RunScene(new MainMenu());
             }
 
-            if (Programm.Game.Input.Mouse.CheckLeftMouseClickUp())
+            if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
             {
                 Units.Add(new Unit(Units[Units.Count - 1]));
             }
 
-            if (Programm.Game.Input.Mouse.CheckMouseRightClickUp())
+            if (Program.Game.Input.Mouse.CheckMouseRightClickUp())
             {
                 switch (AImode)
                 {

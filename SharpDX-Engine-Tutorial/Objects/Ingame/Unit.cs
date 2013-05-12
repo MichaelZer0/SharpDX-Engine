@@ -12,7 +12,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
         public Unit(DrawableObject Target)
         {
             Texture = "Unit";
-            Position = new Coordinate(Helper.Random.Next((int)Programm.Size.width - 8), Helper.Random.Next((int)Programm.Size.height - 16));
+            Position = new Coordinate(Helper.Random.Next((int)Program.Size.width - 8), Helper.Random.Next((int)Program.Size.height - 16));
             Offset = new Coordinate(4, 16);
             Size = new Size(8, 16);
             this.Target = Target;
@@ -25,11 +25,11 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
 
             if (Math.Sqrt(Math.Pow(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), 2) + Math.Pow(((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)), 2)) > 10)
             {
-                if (TargetX > 0 && TargetX < Programm.Size.width - 8)
+                if (TargetX > 0 && TargetX < Program.Size.width - 8)
                 {
                     Position.X = TargetX;
                 }
-                if (TargetY > 0 && TargetY < Programm.Size.height - 16)
+                if (TargetY > 0 && TargetY < Program.Size.height - 16)
                 {
                     Position.Y = TargetY;
                 }
@@ -43,11 +43,11 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
 
             if (Math.Sqrt(Math.Pow(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), 2) + Math.Pow(((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)), 2)) < Distance)
             {
-                if (TargetX > 0 && TargetX < Programm.Size.width - 8)
+                if (TargetX > 0 && TargetX < Program.Size.width - 8)
                 {
                     Position.X = TargetX;
                 }
-                if (TargetY > 0 && TargetY < Programm.Size.height - 16)
+                if (TargetY > 0 && TargetY < Program.Size.height - 16)
                 {
                     Position.Y = TargetY;
                 }

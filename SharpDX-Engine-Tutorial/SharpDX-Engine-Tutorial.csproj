@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="Input\Cursor.cs" />
     <Compile Include="Objects\Ingame\Unit.cs" />
-    <Compile Include="Programm.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Scenes\Ingame.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
   </ItemGroup>

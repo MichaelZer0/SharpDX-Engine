@@ -9,14 +9,14 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Input
         public Cursor()
         {
             Texture = "Cursor";
-            Position = Programm.Game.Input.Mouse.GetCurrentMousePosition();
+            Position = Program.Game.Input.Mouse.GetCurrentMousePosition();
             Size = new SharpDX_Engine.Utitities.Size(12, 19);
         }
 
         public void UpdatePosition()
         {
             //! Moves the Cursor according to the mouse-movement.
-            Position += Programm.Game.Input.Mouse.GetCurrentMousePosition();
+            Position += Program.Game.Input.Mouse.GetCurrentMousePosition();
 
             //! Cages the Cursor into the windows.
             if (Position.X < 0)
@@ -27,13 +27,13 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Input
             {
                 Position.Y = 0;
             }
-            if (Position.X > Programm.Size.width)
+            if (Position.X > Program.Size.width)
             {
-                Position.X = Programm.Size.width;
+                Position.X = Program.Size.width;
             }
-            if (Position.Y > Programm.Size.height)
+            if (Position.Y > Program.Size.height)
             {
-                Position.Y = Programm.Size.height;
+                Position.Y = Program.Size.height;
             }
         }
     }

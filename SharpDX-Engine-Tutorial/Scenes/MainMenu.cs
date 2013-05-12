@@ -44,9 +44,9 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             if (Cursor.Position.IsWithinDrawableObject(MainMenuStart))
             {
                 MainMenuStart.Texture = "StartB";
-                if (Programm.Game.Input.Mouse.CheckLeftMouseClickUp())
+                if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
                 {
-                    Programm.Game.RunScene(new Ingame());
+                    Program.Game.RunScene(new Ingame());
                 }
             }
             else
@@ -56,9 +56,9 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             if (Cursor.Position.IsWithinDrawableObject(MainMenuExit))
             {
                 MainMenuExit.Texture = "ExitB";
-                if (Programm.Game.Input.Mouse.CheckLeftMouseClickUp())
+                if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
                 {
-                    Programm.Game.Close();
+                    Program.Game.Close();
                 }
             }
             else
