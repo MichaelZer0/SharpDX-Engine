@@ -20,19 +20,37 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
 
         public void MoveToTarget()
         {
+            float TargetX = Position.X + 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+            float TargetY = Position.Y + 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+
             if (Math.Sqrt(Math.Pow(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), 2) + Math.Pow(((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)), 2)) > 10)
             {
-                Position.X += 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
-                Position.Y += 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+                if (TargetX > 0 && TargetX < Programm.Size.width - 8)
+                {
+                    Position.X = TargetX;
+                }
+                if (TargetY > 0 && TargetY < Programm.Size.height - 16)
+                {
+                    Position.Y = TargetY;
+                }
             }
         }
 
-        public void MoveFromSppecific(DrawableObject Target, int Distance)
+        public void MoveFromSpecific(DrawableObject Target, int Distance)
         {
+            float TargetX = Position.X - 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+            float TargetY = Position.Y - 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+
             if (Math.Sqrt(Math.Pow(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), 2) + Math.Pow(((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)), 2)) < Distance)
             {
-                Position.X -= 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
-                Position.Y -= 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+                if (TargetX > 0 && TargetX < Programm.Size.width - 8)
+                {
+                    Position.X = TargetX;
+                }
+                if (TargetY > 0 && TargetY < Programm.Size.height - 16)
+                {
+                    Position.Y = TargetY;
+                }
             }
         }
     }

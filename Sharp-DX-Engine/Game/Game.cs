@@ -88,7 +88,7 @@ namespace NekuSoul.SharpDX_Engine
             Timer.Elapsed += _Timer_Elapsed;
             Timer.Start();
             Input = new InputManager();
-            Sound = new Sound.Sound();
+            //x Sound = new Sound.Sound();
         }
 
         void form_Move(object sender, EventArgs e)

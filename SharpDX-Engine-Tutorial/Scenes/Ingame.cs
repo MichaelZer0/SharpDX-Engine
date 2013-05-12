@@ -30,6 +30,11 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         {
             Cursor.UpdatePosition();
 
+            if (Programm.Game.Input.Mouse.CheckLeftMouseDown() && Programm.Game.Input.Mouse.CheckMouseRightDown())
+            {
+                Programm.Game.RunScene(new MainMenu());
+            }
+
             if (Programm.Game.Input.Mouse.CheckLeftMouseClickUp())
             {
                 Units.Add(new Unit(Units[Units.Count - 1]));
@@ -62,8 +67,12 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                     {
                         if (U != U2 && U2 != U.Target)
                         {
-                            U.MoveFromSppecific(U2, 5);
+                            U.MoveFromSpecific(U2, 5);
                         }
+                    }
+                    if (AImode==3)
+                    {
+                        U.MoveFromSpecific(Cursor, 50);
                     }
                 }
                 if (AImode == 2)
@@ -72,9 +81,9 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                     {
                         if (U != U2)
                         {
-                            U.MoveFromSppecific(U2, 50);
+                            U.MoveFromSpecific(U2, 50);
                         }
-                        U.MoveFromSppecific(Cursor, 50);
+                        U.MoveFromSpecific(Cursor, 50);
                     }
                 }
             }
