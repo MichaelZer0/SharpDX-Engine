@@ -12,9 +12,11 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         public Color _ClearColor;
         TextureManager _TextureManager;
         private Coordinate Camera;
+        private Size Zoom;
 
         public Renderer(RenderTarget _RenderTarget, TextureManager _TextureManager, Coordinate Camera)
         {
+            Zoom = new Size(1, 1);
             this.Camera = Camera;
             this._RenderTarget = _RenderTarget;
             this._TextureManager = _TextureManager;
@@ -40,7 +42,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         {
             _RenderTarget.DrawBitmap(
                 _TextureManager.GetTexture(DrawableObject.Texture),
-                    Utitities.Converter.CreateRectangleF(DrawableObject.Position + Camera, DrawableObject.Size),
+                    Utitities.Converter.CreateRectangleF(DrawableObject.Position + Camera, DrawableObject.Size * Zoom),
                     1f,
                     BitmapInterpolationMode.NearestNeighbor
                     );

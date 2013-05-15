@@ -49,6 +49,26 @@ namespace NekuSoul.SharpDX_Engine.Utitities
             this.width = width;
             this.height = height;
         }
+
+        public static Size operator +(Size c1, Size c2)
+        {
+            return new Size(c1.width + c2.width, c1.height + c2.height);
+        }
+
+        public static Size operator +(Size c1, float c2)
+        {
+            return new Size(c1.width + c2, c1.height + c2);
+        }
+
+        public static Size operator *(Size c1, Size c2)
+        {
+            return new Size(c1.width * c2.width, c1.height * c2.height);
+        }
+
+        public static Size operator *(Size c1, float c2)
+        {
+            return new Size(c1.width * c2, c1.height * c2);
+        }
     }
 
     public class Rectangle
