@@ -55,6 +55,9 @@
     <Compile Include="Scenes\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ressources\UnitRed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressources\Cursor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

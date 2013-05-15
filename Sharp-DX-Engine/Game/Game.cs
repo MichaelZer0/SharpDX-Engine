@@ -23,9 +23,10 @@ namespace NekuSoul.SharpDX_Engine
         public Scene Scene;
         public Timer Timer;
         // Under Construction
-       public Sound.Sound Sound;
+        public Sound.Sound Sound;
         public InputManager Input;
-        internal Renderer Renderer;
+        public Renderer Renderer;
+        public Coordinate Camera;
         internal RenderForm form = new RenderForm();
         private SwapChain swapChain;
         private Device1 device;
@@ -83,7 +84,8 @@ namespace NekuSoul.SharpDX_Engine
             form.Move += form_Move;
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
             //swapChain.IsFullScreen = true;
-            Renderer = new Renderer(d2dRenderTarget, _TextureManager);
+            Camera = new Coordinate();
+            Renderer = new Renderer(d2dRenderTarget, _TextureManager, Camera);
             Timer = new Timer(1);
             Timer.Elapsed += _Timer_Elapsed;
             Timer.Start();
@@ -132,6 +134,7 @@ namespace NekuSoul.SharpDX_Engine
 
         public void Run(Scene StartScene)
         {
+            GC.Collect();
             Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
             Scene = StartScene;
             RenderLoop.Run(form, () =>
@@ -140,6 +143,7 @@ namespace NekuSoul.SharpDX_Engine
                 {
                     Input.Mouse.UpdateMouseState();
                     Input.Gamepad.UpdateGamepadState();
+                    Input.Keyboard.UpdateKeyboardState();
                     UpdateScene();
                     AllowUpdate = false;
                     return;

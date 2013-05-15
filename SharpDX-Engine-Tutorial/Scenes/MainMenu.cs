@@ -19,6 +19,11 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         //! The Scenenery is built here.
         public MainMenu()
         {
+            if (Program.Game.Input.Keyboard.IsKeyDown())
+            {
+                Program.Game.RunScene(new Ingame());
+            }
+
             //! Creates the Start- and Exit-Button.
             MainMenuStart = new SimpleDrawableObject()
             {

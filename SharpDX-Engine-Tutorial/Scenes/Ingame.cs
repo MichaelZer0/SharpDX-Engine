@@ -37,6 +37,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
         public void Update()
         {
+
             Cursor.UpdatePosition();
 
             //! If both the Left and Right Mouse-Button are pressed, go back to the Main Menu.

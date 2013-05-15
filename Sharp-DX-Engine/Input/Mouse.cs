@@ -12,12 +12,13 @@ namespace NekuSoul.SharpDX_Engine.Input
         public bool LockMouse = false;
 
         internal Point Point = new Point();
-        private SharpDX.DirectInput.Mouse _Mouse = new SharpDX.DirectInput.Mouse(new DirectInput());
+        private SharpDX.DirectInput.Mouse _Mouse;
         private MouseState CurrentState;
         private MouseState LastState;
 
-        public Mouse()
+        public Mouse(DirectInput DirectInput)
         {
+            _Mouse = new SharpDX.DirectInput.Mouse(DirectInput);
             _Mouse.Acquire();
             UpdateMouseState();
             Cursor.Hide();

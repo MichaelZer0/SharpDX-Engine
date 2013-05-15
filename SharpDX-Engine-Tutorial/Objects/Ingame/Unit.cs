@@ -23,6 +23,8 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
         //! Makes the Unit walk to the Target.
         public void MoveToTarget()
         {
+            Texture = "Unit";
+
             //! Calculates a step towards the Target.
             float TargetX = Position.X + 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
             float TargetY = Position.Y + 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
@@ -39,6 +41,10 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
                 {
                     Position.Y = TargetY;
                 }
+            }
+            else
+            {
+                Texture = "UnitRed";
             }
         }
 
