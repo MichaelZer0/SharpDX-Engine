@@ -27,7 +27,7 @@ namespace NekuSoul.SharpDX_Engine.Input
         public void UpdateMouseState()
         {
             LastState = CurrentState;
-            CurrentState = CurrentState = _Mouse.GetCurrentState();
+            CurrentState  = _Mouse.GetCurrentState();
             if (LockMouse && FormHasFocus)
             {
                 Cursor.Position = Point;

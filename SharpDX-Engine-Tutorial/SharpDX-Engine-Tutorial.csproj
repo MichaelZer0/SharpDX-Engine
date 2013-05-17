@@ -52,9 +52,11 @@
   <ItemGroup>
     <Compile Include="Input\Cursor.cs" />
     <Compile Include="Objects\Ingame\Unit.cs" />
+    <Compile Include="Objects\Tornado\Circle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Scenes\Ingame.cs" />
     <Compile Include="Scenes\MainMenu.cs" />
+    <Compile Include="Scenes\Tornado.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ressources\UnitRed.png">

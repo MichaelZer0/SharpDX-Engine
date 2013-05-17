@@ -25,13 +25,13 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
         {
             Texture = "Unit";
 
-            //! Calculates a step towards the Target.
-            float TargetX = Position.X + 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
-            float TargetY = Position.Y + 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
-
             //! Checks if near the target.
             if (Math.Sqrt(Math.Pow(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), 2) + Math.Pow(((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)), 2)) > 10)
             {
+                //! Calculates a step towards the Target.
+                float TargetX = Position.X + 2 * (float)Math.Sin((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+                float TargetY = Position.Y + 2 * (float)Math.Cos((Math.Atan2(((Target.Position.X + Target.Offset.X) - (Position.X + Target.Offset.X)), ((Target.Position.Y + Target.Offset.Y) - (Position.Y + Target.Offset.Y)))));
+
                 //! First checks if the Unit would stay on Screen, then moves it
                 if (TargetX > 0 && TargetX < Program.Size.width - 8)
                 {

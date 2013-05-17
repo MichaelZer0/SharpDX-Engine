@@ -47,7 +47,8 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             }
 
             //! Spawns a new Unit on Left-Click that is following the last Unit spawned.
-            if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
+            //if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
+            if (Program.Game.Input.Mouse.CheckLeftMouseDown())
             {
                 Units.Add(new Unit(Units[Units.Count - 1]));
             }

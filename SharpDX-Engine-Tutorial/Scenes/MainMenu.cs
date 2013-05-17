@@ -1,5 +1,6 @@
 ﻿using NekuSoul.SharpDX_Engine;
 using NekuSoul.SharpDX_Engine.Graphics;
+using NekuSoul.SharpDX_Engine.Input;
 using NekuSoul.SharpDX_Engine.Objects;
 using NekuSoul.SharpDX_Engine.Utitities;
 using NekuSoul.SharpDX_Engine_Tutorial.Input;
@@ -19,10 +20,6 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         //! The Scenenery is built here.
         public MainMenu()
         {
-            if (Program.Game.Input.Keyboard.IsKeyDown())
-            {
-                Program.Game.RunScene(new Ingame());
-            }
 
             //! Creates the Start- and Exit-Button.
             MainMenuStart = new SimpleDrawableObject()
@@ -48,6 +45,18 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         //! This method is called 60 times per second and contains the logic for the scene.
         public void Update()
         {
+            //! Starts the game when the return Key is pressed 
+            if (Program.Game.Input.Keyboard.IsKeyDown(Key.Return))
+            {
+                Program.Game.RunScene(new Ingame());
+            }
+            //! Exits the game when the ESC Key is pressed 
+            if (Program.Game.Input.Keyboard.IsKeyDown(Key.Escape))
+            {
+                //! Closes the Game
+                Program.Game.Close();
+            }
+
             //! Updates the Cursorposition.
             Cursor.UpdatePosition();
 
@@ -61,7 +70,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
                 {
                     //! Switches from the MainMenu to Ingame.
-                    Program.Game.RunScene(new Ingame());
+                    Program.Game.RunScene(new Tornado());
                     Program.Game.Sound.PlaySound("Select");
                 }
             }

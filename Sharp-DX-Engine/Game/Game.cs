@@ -139,14 +139,14 @@ namespace NekuSoul.SharpDX_Engine
             Scene = StartScene;
             RenderLoop.Run(form, () =>
             {
-                if (AllowUpdate)
+                //if (AllowUpdate)
                 {
                     Input.Mouse.UpdateMouseState();
                     Input.Gamepad.UpdateGamepadState();
                     Input.Keyboard.UpdateKeyboardState();
                     UpdateScene();
-                    AllowUpdate = false;
-                    return;
+                    //AllowUpdate = false;
+                    //return;
                 }
                 DrawScene();
                 swapChain.Present(0, PresentFlags.None);
