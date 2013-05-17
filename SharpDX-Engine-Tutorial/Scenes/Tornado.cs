@@ -3,11 +3,10 @@ using NekuSoul.SharpDX_Engine.Graphics;
 using NekuSoul.SharpDX_Engine_Tutorial.Objects.Tornado;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 {
+    //! Magically draws a Tornado on the screen.
     class Tornado : Scene
     {
         List<Circle> Circles;
@@ -20,29 +19,23 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
         public void Update()
         {
-            //if (started)
+            i += 0.001f;
+            foreach (Circle Circle in Circles)
             {
-                i += 0.001f;
-                //List<Circle> RemCircles = new List<Circle>();
-                foreach (Circle c in Circles)
-                {
-                    c.Update();
-                }
-                {
-                    Circle C = new Circle();
-                    C.Position.X = Program.Game.Input.Mouse.GetCurrentMousePosition().X;
-                    C.Position.Y = Program.Game.Input.Mouse.GetCurrentMousePosition().Y;
-                    C.add += (float)Math.Tan(i);
-                    Circles.Add(C);
-                }
+                Circle.Update();
             }
+            Circle NewCircle = new Circle();
+            NewCircle.Position.X = 30;
+            NewCircle.Position.Y = Program.Size.height - 20;
+            NewCircle.add += (float)Math.Tan(i);
+            Circles.Add(NewCircle);
         }
 
         public void Draw(RenderHelper Renderer)
         {
-            foreach (Circle C in Circles)
+            foreach (Circle Circle in Circles)
             {
-                Renderer.DrawObject(C);
+                Renderer.DrawObject(Circle);
             }
         }
     }

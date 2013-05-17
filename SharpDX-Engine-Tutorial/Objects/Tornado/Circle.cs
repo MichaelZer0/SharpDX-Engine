@@ -1,11 +1,9 @@
 ﻿using NekuSoul.SharpDX_Engine.Objects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Tornado
 {
+    //! This is just a part of the Tornado-Magic.
     class Circle : DrawableObject
     {
         public float i = 1;
@@ -13,14 +11,14 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Tornado
 
         public Circle()
         {
-            Texture = "Unit";
+            Texture = "Circle";
         }
 
         public void Update()
         {
             i += add;
-            Position.X = (135 * (float)Math.Sin(i)) + 0.6f;
-            Position.Y = (135 * (float)Math.Cos(i)) - 0.35f;
+            Position.X += (35 * (float)Math.Sin(i)) + 0.6f;
+            Position.Y += (35 * (float)Math.Cos(i)) - 0.35f;
         }
     }
 }

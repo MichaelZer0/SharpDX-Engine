@@ -3,7 +3,7 @@ using NekuSoul.SharpDX_Engine.Graphics;
 using NekuSoul.SharpDX_Engine.Input;
 using NekuSoul.SharpDX_Engine.Objects;
 using NekuSoul.SharpDX_Engine.Utitities;
-using NekuSoul.SharpDX_Engine_Tutorial.Input;
+using NekuSoul.SharpDX_Engine_Tutorial.Objects;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 {
@@ -14,12 +14,16 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         SimpleDrawableObject MainMenuStart;
         SimpleDrawableObject MainMenuExit;
 
+        //! We do this just because we can put a Scene in a Scene.
+        Scene Background;
+
         //! This displays the Cursor.
         Cursor Cursor;
 
         //! The Scenenery is built here.
         public MainMenu()
         {
+            Background = new Tornado();
 
             //! Creates the Start- and Exit-Button.
             MainMenuStart = new SimpleDrawableObject()
@@ -45,16 +49,13 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         //! This method is called 60 times per second and contains the logic for the scene.
         public void Update()
         {
-            //! Starts the game when the return Key is pressed 
+            //! We have to update the Background as well.
+            Background.Update();
+
+            //! Starts the game when the return Key is pressed.
             if (Program.Game.Input.Keyboard.IsKeyDown(Key.Return))
             {
                 Program.Game.RunScene(new Ingame());
-            }
-            //! Exits the game when the ESC Key is pressed 
-            if (Program.Game.Input.Keyboard.IsKeyDown(Key.Escape))
-            {
-                //! Closes the Game
-                Program.Game.Close();
             }
 
             //! Updates the Cursorposition.
@@ -70,7 +71,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
                 {
                     //! Switches from the MainMenu to Ingame.
-                    Program.Game.RunScene(new Tornado());
+                    Program.Game.RunScene(new Ingame());
                     Program.Game.Sound.PlaySound("Select");
                 }
             }
@@ -95,7 +96,10 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
         public void Draw(RenderHelper Renderer)
         {
-            //! Draws all the Objects!
+            //! At first the Background-Scene!
+            Background.Draw(Renderer);
+
+            //! Then draw all the Objects!
             Renderer.DrawObject(MainMenuStart);
             Renderer.DrawObject(MainMenuExit);
             Renderer.DrawObject(Cursor);

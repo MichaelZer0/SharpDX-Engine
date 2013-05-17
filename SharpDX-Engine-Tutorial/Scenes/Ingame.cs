@@ -1,7 +1,7 @@
 ﻿using NekuSoul.SharpDX_Engine;
 using NekuSoul.SharpDX_Engine.Graphics;
 using NekuSoul.SharpDX_Engine.Utitities;
-using NekuSoul.SharpDX_Engine_Tutorial.Input;
+using NekuSoul.SharpDX_Engine_Tutorial.Objects;
 using NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame;
 using System.Collections.Generic;
 

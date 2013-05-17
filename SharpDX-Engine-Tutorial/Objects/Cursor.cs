@@ -2,14 +2,14 @@
 using NekuSoul.SharpDX_Engine_Tutorial;
 using NekuSoul.SharpDX_Engine.Utitities;
 
-namespace NekuSoul.SharpDX_Engine_Tutorial.Input
+namespace NekuSoul.SharpDX_Engine_Tutorial.Objects
 {
     public class Cursor : DrawableObject
     {
         public Cursor()
         {
             Texture = "Cursor";
-            Position = new Coordinate(Program.Size.width / 2, Program.Size.height / 2);
+            Position = Program.Game.Input.Mouse.GetCurrentMousePosition();
             Size = new SharpDX_Engine.Utitities.Size(12, 19);
         }
 

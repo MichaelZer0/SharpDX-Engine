@@ -21,8 +21,6 @@ namespace NekuSoul.SharpDX_Engine
     public class Game
     {
         public Scene Scene;
-        public Timer Timer;
-        // Under Construction
         public Sound.Sound Sound;
         public InputManager Input;
         public Renderer Renderer;
@@ -30,7 +28,6 @@ namespace NekuSoul.SharpDX_Engine
         internal RenderForm form = new RenderForm();
         private SwapChain swapChain;
         private Device1 device;
-        private bool AllowUpdate;
 
         /// <summary>
         /// A Game powered by SharpDX
@@ -86,9 +83,6 @@ namespace NekuSoul.SharpDX_Engine
             //swapChain.IsFullScreen = true;
             Camera = new Coordinate();
             Renderer = new Renderer(d2dRenderTarget, _TextureManager, Camera);
-            Timer = new Timer(1);
-            Timer.Elapsed += _Timer_Elapsed;
-            Timer.Start();
             Input = new InputManager();
             Sound = new Sound.Sound();
         }
@@ -139,18 +133,13 @@ namespace NekuSoul.SharpDX_Engine
             Scene = StartScene;
             RenderLoop.Run(form, () =>
             {
-                //if (AllowUpdate)
-                {
-                    Input.Mouse.UpdateMouseState();
-                    Input.Gamepad.UpdateGamepadState();
-                    Input.Keyboard.UpdateKeyboardState();
-                    UpdateScene();
-                    //AllowUpdate = false;
-                    //return;
-                }
-                DrawScene();
                 swapChain.Present(0, PresentFlags.None);
                 swapChain.ContainingOutput.WaitForVerticalBlank();
+                Input.Mouse.UpdateMouseState();
+                Input.Gamepad.UpdateGamepadState();
+                Input.Keyboard.UpdateKeyboardState();
+                UpdateScene();
+                DrawScene();
             });
 
             #region Close
@@ -165,11 +154,6 @@ namespace NekuSoul.SharpDX_Engine
         public void RunScene(Scene _Scene)
         {
             this.Scene = _Scene;
-        }
-
-        void _Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            AllowUpdate = true;
         }
 
         public void Close()
