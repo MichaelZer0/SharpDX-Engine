@@ -135,9 +135,7 @@ namespace NekuSoul.SharpDX_Engine
             {
                 swapChain.Present(0, PresentFlags.None);
                 swapChain.ContainingOutput.WaitForVerticalBlank();
-                Input.Mouse.UpdateMouseState();
-                Input.Gamepad.UpdateGamepadState();
-                Input.Keyboard.UpdateKeyboardState();
+                Input.Update();
                 UpdateScene();
                 DrawScene();
             });

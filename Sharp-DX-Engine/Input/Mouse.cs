@@ -27,7 +27,7 @@ namespace NekuSoul.SharpDX_Engine.Input
         public void UpdateMouseState()
         {
             LastState = CurrentState;
-            CurrentState  = _Mouse.GetCurrentState();
+            CurrentState = _Mouse.GetCurrentState();
             if (LockMouse && FormHasFocus)
             {
                 Cursor.Position = Point;
@@ -56,50 +56,33 @@ namespace NekuSoul.SharpDX_Engine.Input
             };
         }
 
-        public bool CheckLeftMouseDown()
+        public bool CheckButtonDown(Button Button)
         {
-            return CurrentState.Buttons[0];
+            return CurrentState.Buttons[(int)Button];
         }
 
-        public bool CheckMouseLeftClickDown()
+        public bool CheckButtonClickDown(Button Button)
         {
-            if (!LastState.Buttons[0])
+            if (!LastState.Buttons[(int)Button])
             {
-                return CurrentState.Buttons[0];
+                return CurrentState.Buttons[(int)Button];
             }
             return false;
         }
 
-        public bool CheckLeftMouseClickUp()
+        public bool CheckButtonClickUp(Button Button)
         {
-            if (LastState.Buttons[0])
+            if (LastState.Buttons[(int)Button])
             {
-                return !CurrentState.Buttons[0];
+                return !CurrentState.Buttons[(int)Button];
             }
             return false;
         }
 
-        public bool CheckMouseRightDown()
+        public enum Button
         {
-            return CurrentState.Buttons[1];
-        }
-
-        public bool CheckMouseRightClickDown()
-        {
-            if (!LastState.Buttons[1])
-            {
-                return CurrentState.Buttons[1];
-            }
-            return false;
-        }
-
-        public bool CheckMouseRightClickUp()
-        {
-            if (LastState.Buttons[1])
-            {
-                return !CurrentState.Buttons[1];
-            }
-            return false;
+            LeftMouse = 0,
+            RightMouse
         }
     }
 }

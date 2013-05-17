@@ -53,9 +53,16 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             Background.Update();
 
             //! Starts the game when the return Key is pressed.
-            if (Program.Game.Input.Keyboard.IsKeyDown(Key.Return))
+            if (Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Return))
             {
                 Program.Game.RunScene(new Ingame());
+            }
+
+            //! Exits the game when the Escape Key is pressed.
+            if (Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Escape))
+            {
+                //! Closes the Game
+                Program.Game.Close();
             }
 
             //! Updates the Cursorposition.
@@ -68,7 +75,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 MainMenuStart.Texture = "StartB";
 
                 //! Checks if the Left Mouse-Button has been clicked.
-                if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
+                if (Program.Game.Input.Mouse.CheckButtonClickUp(Mouse.Button.LeftMouse))
                 {
                     //! Switches from the MainMenu to Ingame.
                     Program.Game.RunScene(new Ingame());
@@ -82,7 +89,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             if (Cursor.Position.IsWithinDrawableObject(MainMenuExit))
             {
                 MainMenuExit.Texture = "ExitB";
-                if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
+                if (Program.Game.Input.Mouse.CheckButtonClickUp(Mouse.Button.LeftMouse))
                 {
                     //! Closes the Game
                     Program.Game.Close();

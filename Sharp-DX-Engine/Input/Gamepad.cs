@@ -27,14 +27,14 @@ namespace NekuSoul.SharpDX_Engine.Input
         /// Returns current Mouse-Position
         /// </summary>
         /// <returns></returns>
-        public bool CheckGamepadButton(GamepadButton Button)
+        public bool CheckGamepadButton(Button Button)
         {
             if (Controller.IsConnected)
             {
                 GamepadButtonFlags CheckButton = GamepadButtonFlags.None;
                 switch (Button)
                 {
-                    case GamepadButton.A:
+                    case Button.A:
                         {
                             CheckButton = GamepadButtonFlags.A;
                             break;
@@ -45,7 +45,7 @@ namespace NekuSoul.SharpDX_Engine.Input
             return false;
         }
 
-        public enum GamepadButton
+        public enum Button
         {
             A,
             B,

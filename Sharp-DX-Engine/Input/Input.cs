@@ -14,5 +14,12 @@ namespace NekuSoul.SharpDX_Engine.Input
             Mouse = new Mouse(DirectInput);
             Gamepad = new Gamepad();
         }
+
+        internal void Update()
+        {
+            Keyboard.UpdateKeyboardState();
+            Mouse.UpdateMouseState();
+            Gamepad.UpdateGamepadState();
+        }
     }
 }

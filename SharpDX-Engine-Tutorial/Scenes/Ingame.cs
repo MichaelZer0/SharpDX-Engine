@@ -1,5 +1,6 @@
 ﻿using NekuSoul.SharpDX_Engine;
 using NekuSoul.SharpDX_Engine.Graphics;
+using NekuSoul.SharpDX_Engine.Input;
 using NekuSoul.SharpDX_Engine.Utitities;
 using NekuSoul.SharpDX_Engine_Tutorial.Objects;
 using NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame;
@@ -37,24 +38,28 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
         public void Update()
         {
+            //! Exits the game when the Escape Key is pressed.
+            if (Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Escape))
+            {
+                Program.Game.RunScene(new MainMenu());
+            }
 
             Cursor.UpdatePosition();
 
             //! If both the Left and Right Mouse-Button are pressed, go back to the Main Menu.
-            if (Program.Game.Input.Mouse.CheckLeftMouseDown() && Program.Game.Input.Mouse.CheckMouseRightDown())
+            if (Program.Game.Input.Mouse.CheckButtonDown(Mouse.Button.LeftMouse) && Program.Game.Input.Mouse.CheckButtonDown(Mouse.Button.RightMouse))
             {
                 Program.Game.RunScene(new MainMenu());
             }
 
             //! Spawns a new Unit on Left-Click that is following the last Unit spawned.
-            //if (Program.Game.Input.Mouse.CheckLeftMouseClickUp())
-            if (Program.Game.Input.Mouse.CheckLeftMouseDown())
+            if (Program.Game.Input.Mouse.CheckButtonClickDown(Mouse.Button.LeftMouse))
             {
                 Units.Add(new Unit(Units[Units.Count - 1]));
             }
 
             //! Switches to the next AI behaviour on Right-Click.
-            if (Program.Game.Input.Mouse.CheckMouseRightClickUp())
+            if (Program.Game.Input.Mouse.CheckButtonClickUp(Mouse.Button.RightMouse))
             {
                 Program.Game.Sound.PlaySound("Select");
                 switch (AImode)
