@@ -1,5 +1,4 @@
-﻿using NekuSoul.SharpDX_Engine.Objects;
-using SharpDX;
+﻿using SharpDX;
 using SharpDX.Direct2D1;
 
 namespace NekuSoul.SharpDX_Engine.Utitities

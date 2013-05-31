@@ -1,5 +1,4 @@
 ﻿using NekuSoul.SharpDX_Engine.Utitities;
-using NekuSoul.SharpDX_Engine.Graphics;
 
 namespace NekuSoul.SharpDX_Engine.Objects
 {
@@ -31,6 +30,7 @@ namespace NekuSoul.SharpDX_Engine.Objects
         public Coordinate Position;
         public Coordinate Offset;
         public Size Size;
+        public float Transparency;
 
         public DrawableObject()
         {
@@ -38,6 +38,7 @@ namespace NekuSoul.SharpDX_Engine.Objects
             Position = new Coordinate(0f, 0f);
             Offset = new Coordinate(0f, 0f);
             Size = new Size(32f, 32f);
+            Transparency = 1f;
         }
     }
 

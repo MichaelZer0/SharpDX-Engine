@@ -7,14 +7,12 @@ using SharpDX.DXGI;
 using SharpDX.Windows;
 using System;
 using System.Drawing;
-using System.Timers;
 using System.Windows.Forms;
 using AlphaMode = SharpDX.Direct2D1.AlphaMode;
 using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
-using Timer = System.Timers.Timer;
 
 namespace NekuSoul.SharpDX_Engine
 {
@@ -24,8 +22,9 @@ namespace NekuSoul.SharpDX_Engine
         public Sound.Sound Sound;
         public InputManager Input;
         public Renderer Renderer;
-        public Coordinate Camera;
-        internal RenderForm form = new RenderForm();
+        public Coordinate WindowPosition;
+        public int Timer;
+        internal RenderForm form;
         private SwapChain swapChain;
         private Device1 device;
 
@@ -38,7 +37,8 @@ namespace NekuSoul.SharpDX_Engine
         {
             GC.Collect();
 
-            //RenderForm form = new RenderForm();
+            form = new RenderForm();
+            form.StartPosition = FormStartPosition.CenterScreen;
             form.ClientSize = new System.Drawing.Size((int)Size.width, (int)Size.height);
             form.MaximizeBox = false;
             form.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -79,17 +79,23 @@ namespace NekuSoul.SharpDX_Engine
             form.GotFocus += form_GotFocus;
             form.LostFocus += form_LostFocus;
             form.Move += form_Move;
+            WindowPosition = new Coordinate(
+                form.Location.X + SystemInformation.FixedFrameBorderSize.Width + SystemInformation.DragSize.Width,
+                form.Location.Y + SystemInformation.FixedFrameBorderSize.Height + SystemInformation.CaptionHeight + SystemInformation.DragSize.Height
+                );
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
             //swapChain.IsFullScreen = true;
-            Camera = new Coordinate();
-            Renderer = new Renderer(d2dRenderTarget, _TextureManager, Camera);
+            Renderer = new Renderer(d2dRenderTarget, _TextureManager);
             Input = new InputManager();
             Sound = new Sound.Sound();
+
+            Timer = 0;
         }
 
         void form_Move(object sender, EventArgs e)
         {
             Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
+            WindowPosition = new Coordinate(form.Location.X + SystemInformation.BorderSize.Width, form.Location.Y + SystemInformation.BorderSize.Height);
         }
 
         void form_LostFocus(object sender, EventArgs e)
@@ -138,6 +144,11 @@ namespace NekuSoul.SharpDX_Engine
                 Input.Update();
                 UpdateScene();
                 DrawScene();
+                Timer++;
+                if (Timer == 60)
+                {
+                    Timer = 0;
+                }
             });
 
             #region Close
@@ -162,6 +173,11 @@ namespace NekuSoul.SharpDX_Engine
         public void ShowMessageBox(string Caption, string Text)
         {
             MessageBox.Show(Text, Caption);
+        }
+
+        public void SetName(string Name)
+        {
+            form.Text = Name;
         }
     }
 }

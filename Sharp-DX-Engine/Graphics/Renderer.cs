@@ -2,7 +2,7 @@
 using NekuSoul.SharpDX_Engine.Utitities;
 using SharpDX;
 using SharpDX.Direct2D1;
-using System.Collections.Generic;
+using SharpDX.DirectWrite;
 
 namespace NekuSoul.SharpDX_Engine.Graphics
 {
@@ -11,13 +11,14 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         public RenderTarget _RenderTarget;
         public Color _ClearColor;
         TextureManager _TextureManager;
-        private Coordinate Camera;
+        public Coordinate Camera;
         private Size Zoom;
+        TextFormat DefaultFormat = new TextFormat(new SharpDX.DirectWrite.Factory(), "Calibri", 16) { TextAlignment = TextAlignment.Leading, ParagraphAlignment = ParagraphAlignment.Near, WordWrapping = WordWrapping.NoWrap };
 
-        public Renderer(RenderTarget _RenderTarget, TextureManager _TextureManager, Coordinate Camera)
+        public Renderer(RenderTarget _RenderTarget, TextureManager _TextureManager)
         {
             Zoom = new Size(1, 1);
-            this.Camera = Camera;
+            this.Camera = new Coordinate(0,0);
             this._RenderTarget = _RenderTarget;
             this._TextureManager = _TextureManager;
             _RenderTarget.AntialiasMode = AntialiasMode.Aliased;
@@ -42,15 +43,23 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         {
             _RenderTarget.DrawBitmap(
                 _TextureManager.GetTexture(DrawableObject.Texture),
-                    Utitities.Converter.CreateRectangleF(DrawableObject.Position + Camera, DrawableObject.Size * Zoom),
-                    1f,
+                    Utitities.Converter.CreateRectangleF(
+                    DrawableObject.Position + Camera,
+                    DrawableObject.Size * Zoom),
+                    DrawableObject.Transparency,
                     BitmapInterpolationMode.NearestNeighbor
                     );
+        }
+
+        public void DrawText(string Text, Coordinate Coordinate)
+        {
+            _RenderTarget.DrawText(Text, DefaultFormat, Utitities.Converter.CreateRectangleF(Coordinate, new Size()), new SolidColorBrush(_RenderTarget, Color.White));
         }
     }
 
     public interface RenderHelper
     {
         void DrawObject(DrawableObject DrawableObject);
+        void DrawText(string Text, Coordinate Coordinate);
     }
 }

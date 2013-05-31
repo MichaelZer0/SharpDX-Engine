@@ -85,4 +85,12 @@ namespace NekuSoul.SharpDX_Engine.Utitities
             this.Size = Size;
         }
     }
+
+    public enum Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
 }

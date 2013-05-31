@@ -1,5 +1,4 @@
-﻿using System;
-using SharpDX.XInput;
+﻿using SharpDX.XInput;
 
 namespace NekuSoul.SharpDX_Engine.Input
 {

@@ -11,7 +11,8 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Tornado
 
         public Circle()
         {
-            Texture = "Circle";
+            Texture = "Unit";
+            Size = new SharpDX_Engine.Utitities.Size(128, 128);
         }
 
         public void Update()

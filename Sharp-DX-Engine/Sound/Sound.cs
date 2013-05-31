@@ -42,7 +42,7 @@ namespace NekuSoul.SharpDX_Engine.Sound
 
         public CachedSound(string FileName)
         {
-            SoundStream = new SoundStream(File.OpenRead("Ressources\\" + FileName + ".wav"));
+            SoundStream = new SoundStream(File.OpenRead("Ressources\\Sound\\" + FileName + ".wav"));
             Buffer = new AudioBuffer
             {
                 Stream = SoundStream.ToDataStream(),

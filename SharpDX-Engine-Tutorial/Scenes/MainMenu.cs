@@ -53,13 +53,13 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
             Background.Update();
 
             //! Starts the game when the return Key is pressed.
-            if (Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Return))
+            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.Return))
             {
                 Program.Game.RunScene(new Ingame());
             }
 
             //! Exits the game when the Escape Key is pressed.
-            if (Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Escape))
+            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.Escape))
             {
                 //! Closes the Game
                 Program.Game.Close();

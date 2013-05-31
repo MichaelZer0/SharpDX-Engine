@@ -84,9 +84,11 @@
     <Compile Include="Utitities\Definitions.cs" />
     <Compile Include="Utitities\Helper.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Ressources\Default.png">
+    <Folder Include="Ressources\Sound\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ressources\Graphics\Default.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

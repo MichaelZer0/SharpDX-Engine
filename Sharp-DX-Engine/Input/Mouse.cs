@@ -1,5 +1,4 @@
 ﻿using NekuSoul.SharpDX_Engine.Utitities;
-using NekuSoul.SharpDX_Engine;
 using SharpDX.DirectInput;
 using System.Drawing;
 using System.Windows.Forms;
@@ -21,6 +20,15 @@ namespace NekuSoul.SharpDX_Engine.Input
             _Mouse = new SharpDX.DirectInput.Mouse(DirectInput);
             _Mouse.Acquire();
             UpdateMouseState();
+        }
+
+        public void ShowCursor()
+        {
+            Cursor.Show();
+        }
+
+        public void HideCursor()
+        {
             Cursor.Hide();
         }
 
@@ -31,6 +39,14 @@ namespace NekuSoul.SharpDX_Engine.Input
             if (LockMouse && FormHasFocus)
             {
                 Cursor.Position = Point;
+            }
+        }
+
+        public void SetMousePosition(Coordinate Position)
+        {
+            if (FormHasFocus)
+            {
+                Cursor.Position = new System.Drawing.Point((int)Position.X, (int)Position.Y);
             }
         }
 

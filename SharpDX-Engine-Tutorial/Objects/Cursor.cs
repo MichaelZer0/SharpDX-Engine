@@ -1,6 +1,4 @@
 ﻿using NekuSoul.SharpDX_Engine.Objects;
-using NekuSoul.SharpDX_Engine_Tutorial;
-using NekuSoul.SharpDX_Engine.Utitities;
 
 namespace NekuSoul.SharpDX_Engine_Tutorial.Objects
 {
@@ -35,6 +33,8 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Objects
             {
                 Position.Y = Program.Size.height;
             }
+
+            //Program.Game.Input.Mouse.SetMousePosition(Position + Program.Game.WindowPosition);
         }
     }
 }

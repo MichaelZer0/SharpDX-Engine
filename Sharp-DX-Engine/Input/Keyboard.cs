@@ -1,8 +1,5 @@
-﻿using NekuSoul.SharpDX_Engine.Utitities;
-using NekuSoul.SharpDX_Engine;
-using SharpDX.DirectInput;
+﻿using SharpDX.DirectInput;
 using System.Collections.Generic;
-using System;
 using SharpDXKey = SharpDX.DirectInput.Key;
 
 namespace NekuSoul.SharpDX_Engine.Input
@@ -30,6 +27,24 @@ namespace NekuSoul.SharpDX_Engine.Input
         public bool IsKeyDown(Key Key)
         {
             if (CurrentState.Contains((SharpDXKey)Key))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsKeyPushedDown(Key Key)
+        {
+            if (CurrentState.Contains((SharpDXKey)Key) && !LastState.Contains((SharpDXKey)Key))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsKeyPushedUp(Key Key)
+        {
+            if (!CurrentState.Contains((SharpDXKey)Key) && LastState.Contains((SharpDXKey)Key))
             {
                 return true;
             }
@@ -159,7 +174,7 @@ namespace NekuSoul.SharpDX_Engine.Input
             RightAlt = 184,
             Pause = 197,
             Home = 199,
-            UpArrow = 200,
+            Up = 200,
             PageUp = 201,
             Left = 203,
             Right = 205,
