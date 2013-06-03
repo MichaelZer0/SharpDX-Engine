@@ -13,6 +13,7 @@ using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
+using System.Diagnostics;
 
 namespace NekuSoul.SharpDX_Engine
 {
@@ -23,10 +24,16 @@ namespace NekuSoul.SharpDX_Engine
         public InputManager Input;
         public Renderer Renderer;
         public Coordinate WindowPosition;
-        public int Timer;
         internal RenderForm form;
         private SwapChain swapChain;
         private Device1 device;
+        public Timer Timer;
+        private Timer Timer2;
+        Stopwatch Stopwatch;
+        private int Debug1Counter;
+        private int Debug2Counter;
+        private int DrawCounter;
+        private int UpdateCounter;
 
         /// <summary>
         /// A Game powered by SharpDX
@@ -84,12 +91,37 @@ namespace NekuSoul.SharpDX_Engine
                 form.Location.Y + SystemInformation.FixedFrameBorderSize.Height + SystemInformation.CaptionHeight + SystemInformation.DragSize.Height
                 );
             TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
-            //swapChain.IsFullScreen = true;
+            //x swapChain.IsFullScreen = true;
             Renderer = new Renderer(d2dRenderTarget, _TextureManager);
             Input = new InputManager();
             Sound = new Sound.Sound();
 
-            Timer = 0;
+            Timer = new Timer();
+            Timer.Interval = 20;
+            Timer.Tick += Timer_Tick;
+            Timer.Start();
+
+            Timer2 = new Timer();
+            Timer2.Interval = 1000;
+            Timer2.Tick += Timer_Tick2;
+            Timer2.Start();
+
+            Stopwatch = new Stopwatch();
+        }
+
+        void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateCounter++;
+            Input.Update();
+            Scene.Update();
+        }
+
+        void Timer_Tick2(object sender, EventArgs e)
+        {
+            Debug1Counter = UpdateCounter;
+            Debug2Counter = DrawCounter;
+            DrawCounter = 0;
+            UpdateCounter = 0;
         }
 
         void form_Move(object sender, EventArgs e)
@@ -128,7 +160,7 @@ namespace NekuSoul.SharpDX_Engine
         {
             if (Scene != null)
             {
-                Renderer.Draw(Scene);
+                Renderer.Draw(Scene, "U: " + Debug1Counter + "\nD: " + Debug2Counter);
             }
         }
 
@@ -139,16 +171,10 @@ namespace NekuSoul.SharpDX_Engine
             Scene = StartScene;
             RenderLoop.Run(form, () =>
             {
-                swapChain.Present(0, PresentFlags.None);
-                swapChain.ContainingOutput.WaitForVerticalBlank();
-                Input.Update();
-                UpdateScene();
                 DrawScene();
-                Timer++;
-                if (Timer == 60)
-                {
-                    Timer = 0;
-                }
+                swapChain.Present(0, PresentFlags.None);
+                //swapChain.ContainingOutput.WaitForVerticalBlank();
+                DrawCounter++;
             });
 
             #region Close

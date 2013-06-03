@@ -18,17 +18,19 @@ namespace NekuSoul.SharpDX_Engine.Graphics
         public Renderer(RenderTarget _RenderTarget, TextureManager _TextureManager)
         {
             Zoom = new Size(1, 1);
-            this.Camera = new Coordinate(0,0);
+            this.Camera = new Coordinate(0, 0);
             this._RenderTarget = _RenderTarget;
             this._TextureManager = _TextureManager;
             _RenderTarget.AntialiasMode = AntialiasMode.Aliased;
+            _ClearColor = Color.Black;
         }
 
-        public void Draw(Scene ActiveScene)
+        public void Draw(Scene ActiveScene, string DebugText)
         {
             _RenderTarget.BeginDraw();
             _RenderTarget.Clear(_ClearColor);
             ActiveScene.Draw(this);
+            DrawText(DebugText, new Coordinate(0, 100));
             _RenderTarget.EndDraw();
         }
 
@@ -44,7 +46,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
             _RenderTarget.DrawBitmap(
                 _TextureManager.GetTexture(DrawableObject.Texture),
                     Utitities.Converter.CreateRectangleF(
-                    DrawableObject.Position + Camera,
+                    DrawableObject.Position + DrawableObject.Offset + Camera,
                     DrawableObject.Size * Zoom),
                     DrawableObject.Transparency,
                     BitmapInterpolationMode.NearestNeighbor

@@ -31,6 +31,7 @@ namespace NekuSoul.SharpDX_Engine.Objects
         public Coordinate Offset;
         public Size Size;
         public float Transparency;
+        //x private Rectangle Rectangle;
 
         public DrawableObject()
         {
