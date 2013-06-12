@@ -25,12 +25,11 @@ namespace NekuSoul.SharpDX_Engine.Graphics
             _ClearColor = Color.Black;
         }
 
-        public void Draw(Scene ActiveScene, string DebugText)
+        public void Draw(Scene ActiveScene)
         {
             _RenderTarget.BeginDraw();
             _RenderTarget.Clear(_ClearColor);
             ActiveScene.Draw(this);
-            DrawText(DebugText, new Coordinate(0, 100));
             _RenderTarget.EndDraw();
         }
 
@@ -43,14 +42,30 @@ namespace NekuSoul.SharpDX_Engine.Graphics
 
         public void DrawObject(DrawableObject DrawableObject)
         {
-            _RenderTarget.DrawBitmap(
-                _TextureManager.GetTexture(DrawableObject.Texture),
-                    Utitities.Converter.CreateRectangleF(
-                    DrawableObject.Position + DrawableObject.Offset + Camera,
-                    DrawableObject.Size * Zoom),
-                    DrawableObject.Transparency,
-                    BitmapInterpolationMode.NearestNeighbor
-                    );
+            //! TODO: Use Inline-If.
+            if (DrawableObject.CameraAffected)
+            {
+                _RenderTarget.DrawBitmap(
+                   _TextureManager.GetTexture(DrawableObject.Texture),
+                       Utitities.Converter.CreateRectangleF(
+                       DrawableObject.Position + DrawableObject.Offset + Camera,
+                       DrawableObject.Size * Zoom),
+                       DrawableObject.Transparency,
+                       BitmapInterpolationMode.NearestNeighbor
+                       );
+            }
+            else
+            {
+                _RenderTarget.DrawBitmap(
+                   _TextureManager.GetTexture(DrawableObject.Texture),
+                       Utitities.Converter.CreateRectangleF(
+                       DrawableObject.Position + DrawableObject.Offset,
+                       DrawableObject.Size * Zoom),
+                       DrawableObject.Transparency,
+                       BitmapInterpolationMode.NearestNeighbor
+                       );
+            }
+            
         }
 
         public void DrawText(string Text, Coordinate Coordinate)

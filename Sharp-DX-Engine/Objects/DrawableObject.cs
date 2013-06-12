@@ -31,6 +31,7 @@ namespace NekuSoul.SharpDX_Engine.Objects
         public Coordinate Offset;
         public Size Size;
         public float Transparency;
+        public bool CameraAffected;
         //x private Rectangle Rectangle;
 
         public DrawableObject()
@@ -40,6 +41,7 @@ namespace NekuSoul.SharpDX_Engine.Objects
             Offset = new Coordinate(0f, 0f);
             Size = new Size(32f, 32f);
             Transparency = 1f;
+            CameraAffected = true;
         }
     }
 

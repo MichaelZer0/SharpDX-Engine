@@ -27,13 +27,7 @@ namespace NekuSoul.SharpDX_Engine
         internal RenderForm form;
         private SwapChain swapChain;
         private Device1 device;
-        public Timer Timer;
-        private Timer Timer2;
         Stopwatch Stopwatch;
-        private int Debug1Counter;
-        private int Debug2Counter;
-        private int DrawCounter;
-        private int UpdateCounter;
 
         /// <summary>
         /// A Game powered by SharpDX
@@ -96,32 +90,8 @@ namespace NekuSoul.SharpDX_Engine
             Input = new InputManager();
             Sound = new Sound.Sound();
 
-            Timer = new Timer();
-            Timer.Interval = 20;
-            Timer.Tick += Timer_Tick;
-            Timer.Start();
-
-            Timer2 = new Timer();
-            Timer2.Interval = 1000;
-            Timer2.Tick += Timer_Tick2;
-            Timer2.Start();
-
             Stopwatch = new Stopwatch();
-        }
-
-        void Timer_Tick(object sender, EventArgs e)
-        {
-            UpdateCounter++;
-            Input.Update();
-            Scene.Update();
-        }
-
-        void Timer_Tick2(object sender, EventArgs e)
-        {
-            Debug1Counter = UpdateCounter;
-            Debug2Counter = DrawCounter;
-            DrawCounter = 0;
-            UpdateCounter = 0;
+            Stopwatch.Start();
         }
 
         void form_Move(object sender, EventArgs e)
@@ -160,7 +130,7 @@ namespace NekuSoul.SharpDX_Engine
         {
             if (Scene != null)
             {
-                Renderer.Draw(Scene, "U: " + Debug1Counter + "\nD: " + Debug2Counter);
+                Renderer.Draw(Scene);
             }
         }
 
@@ -171,10 +141,15 @@ namespace NekuSoul.SharpDX_Engine
             Scene = StartScene;
             RenderLoop.Run(form, () =>
             {
+                if (Stopwatch.ElapsedMilliseconds > 10)
+                {
+                    Input.Update();
+                    Scene.Update();
+                    Stopwatch.Restart();
+                }
                 DrawScene();
                 swapChain.Present(0, PresentFlags.None);
                 //swapChain.ContainingOutput.WaitForVerticalBlank();
-                DrawCounter++;
             });
 
             #region Close
