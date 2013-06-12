@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NekuSoul.SharpDX_Engine.Utitities
+namespace SharpDX_Engine.Utitities
 {
     public static class Helper
     {

@@ -1,6 +1,6 @@
-﻿using NekuSoul.SharpDX_Engine.Graphics;
+﻿using SharpDX_Engine.Graphics;
 
-namespace NekuSoul.SharpDX_Engine
+namespace SharpDX_Engine
 {
     public interface Scene
     {

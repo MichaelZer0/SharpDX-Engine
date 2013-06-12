@@ -1,26 +1,24 @@
-﻿using NekuSoul.SharpDX_Engine.Objects;
-using NekuSoul.SharpDX_Engine.Utitities;
+﻿using SharpDX_Engine.Objects;
+using SharpDX_Engine.Utitities;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
 
-namespace NekuSoul.SharpDX_Engine.Graphics
+namespace SharpDX_Engine.Graphics
 {
     public class Renderer : RenderHelper
     {
         public RenderTarget _RenderTarget;
         public Color _ClearColor;
-        TextureManager _TextureManager;
         public Coordinate Camera;
         private Size Zoom;
         TextFormat DefaultFormat = new TextFormat(new SharpDX.DirectWrite.Factory(), "Calibri", 16) { TextAlignment = TextAlignment.Leading, ParagraphAlignment = ParagraphAlignment.Near, WordWrapping = WordWrapping.NoWrap };
 
-        public Renderer(RenderTarget _RenderTarget, TextureManager _TextureManager)
+        public Renderer(RenderTarget _RenderTarget)
         {
             Zoom = new Size(1, 1);
             this.Camera = new Coordinate(0, 0);
             this._RenderTarget = _RenderTarget;
-            this._TextureManager = _TextureManager;
             _RenderTarget.AntialiasMode = AntialiasMode.Aliased;
             _ClearColor = Color.Black;
         }
@@ -46,18 +44,19 @@ namespace NekuSoul.SharpDX_Engine.Graphics
             if (DrawableObject.CameraAffected)
             {
                 _RenderTarget.DrawBitmap(
-                   _TextureManager.GetTexture(DrawableObject.Texture),
+                   Game.TextureManager.GetTexture(DrawableObject.Texture),
                        Utitities.Converter.CreateRectangleF(
                        DrawableObject.Position + DrawableObject.Offset + Camera,
                        DrawableObject.Size * Zoom),
                        DrawableObject.Transparency,
-                       BitmapInterpolationMode.NearestNeighbor
+                       BitmapInterpolationMode.NearestNeighbor,
+                       new RectangleF((DrawableObject.FrameCount - 1) * DrawableObject.Size.width, 0, (DrawableObject.FrameCount) * DrawableObject.Size.width, DrawableObject.Size.height)
                        );
             }
             else
             {
                 _RenderTarget.DrawBitmap(
-                   _TextureManager.GetTexture(DrawableObject.Texture),
+                   Game.TextureManager.GetTexture(DrawableObject.Texture),
                        Utitities.Converter.CreateRectangleF(
                        DrawableObject.Position + DrawableObject.Offset,
                        DrawableObject.Size * Zoom),
@@ -65,7 +64,7 @@ namespace NekuSoul.SharpDX_Engine.Graphics
                        BitmapInterpolationMode.NearestNeighbor
                        );
             }
-            
+
         }
 
         public void DrawText(string Text, Coordinate Coordinate)

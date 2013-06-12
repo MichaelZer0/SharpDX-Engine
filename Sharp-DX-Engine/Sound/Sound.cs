@@ -3,7 +3,7 @@ using SharpDX.XAudio2;
 using System.Collections.Generic;
 using System.IO;
 
-namespace NekuSoul.SharpDX_Engine.Sound
+namespace SharpDX_Engine.Sound
 {
     public class Sound
     {

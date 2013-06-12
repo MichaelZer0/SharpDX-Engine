@@ -1,6 +1,6 @@
 ﻿using SharpDX.XInput;
 
-namespace NekuSoul.SharpDX_Engine.Input
+namespace SharpDX_Engine.Input
 {
     public class Gamepad
     {

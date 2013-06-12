@@ -1,6 +1,6 @@
-﻿using NekuSoul.SharpDX_Engine.Objects;
+﻿using SharpDX_Engine.Objects;
 
-namespace NekuSoul.SharpDX_Engine.Utitities
+namespace SharpDX_Engine.Utitities
 {
     public class Coordinate
     {

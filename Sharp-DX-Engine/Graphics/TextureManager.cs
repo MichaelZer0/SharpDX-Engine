@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace NekuSoul.SharpDX_Engine.Graphics
+namespace SharpDX_Engine.Graphics
 {
     public class TextureManager
     {

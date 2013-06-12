@@ -1,7 +1,7 @@
 ﻿using SharpDX;
 using SharpDX.Direct2D1;
 
-namespace NekuSoul.SharpDX_Engine.Utitities
+namespace SharpDX_Engine.Utitities
 {
     class Converter
     {

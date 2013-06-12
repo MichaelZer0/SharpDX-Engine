@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SharpDXKey = SharpDX.DirectInput.Key;
 
-namespace NekuSoul.SharpDX_Engine.Input
+namespace SharpDX_Engine.Input
 {
     public class Keyboard
     {

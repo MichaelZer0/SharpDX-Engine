@@ -1,11 +1,12 @@
-﻿using NekuSoul.SharpDX_Engine.Graphics;
-using NekuSoul.SharpDX_Engine.Input;
-using NekuSoul.SharpDX_Engine.Utitities;
-using SharpDX.Direct2D1;
+﻿using SharpDX.Direct2D1;
 using SharpDX.Direct3D10;
 using SharpDX.DXGI;
 using SharpDX.Windows;
+using SharpDX_Engine.Graphics;
+using SharpDX_Engine.Input;
+using SharpDX_Engine.Utitities;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using AlphaMode = SharpDX.Direct2D1.AlphaMode;
@@ -13,28 +14,29 @@ using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
-using System.Diagnostics;
 
-namespace NekuSoul.SharpDX_Engine
+namespace SharpDX_Engine
 {
     public class Game
     {
-        public Scene Scene;
-        public Sound.Sound Sound;
-        public InputManager Input;
-        public Renderer Renderer;
-        public Coordinate WindowPosition;
-        internal RenderForm form;
-        private SwapChain swapChain;
-        private Device1 device;
-        Stopwatch Stopwatch;
+        static public Scene Scene;
+        static public Sound.Sound Sound;
+        static public InputManager Input;
+        static public Renderer Renderer;
+        static public TextureManager TextureManager;
+        static public Coordinate WindowPosition;
+        static public SharpDX_Engine.Utitities.Size Size;
+        static internal RenderForm form;
+        static private SwapChain swapChain;
+        static private Device1 device;
+        static Stopwatch Stopwatch;
 
         /// <summary>
         /// A Game powered by SharpDX
         /// </summary>
         /// <param name="Width">The width of the window</param>
         /// <param name="Height">The height of the window</param>
-        public Game(NekuSoul.SharpDX_Engine.Utitities.Size Size)
+        static public void Initialize(SharpDX_Engine.Utitities.Size Size)
         {
             GC.Collect();
 
@@ -84,9 +86,10 @@ namespace NekuSoul.SharpDX_Engine
                 form.Location.X + SystemInformation.FixedFrameBorderSize.Width + SystemInformation.DragSize.Width,
                 form.Location.Y + SystemInformation.FixedFrameBorderSize.Height + SystemInformation.CaptionHeight + SystemInformation.DragSize.Height
                 );
-            TextureManager _TextureManager = new TextureManager(d2dRenderTarget);
+            TextureManager = new TextureManager(d2dRenderTarget);
             //x swapChain.IsFullScreen = true;
-            Renderer = new Renderer(d2dRenderTarget, _TextureManager);
+            Game.Size = Size;
+            Renderer = new Renderer(d2dRenderTarget);
             Input = new InputManager();
             Sound = new Sound.Sound();
 
@@ -94,23 +97,23 @@ namespace NekuSoul.SharpDX_Engine
             Stopwatch.Start();
         }
 
-        void form_Move(object sender, EventArgs e)
+        static void form_Move(object sender, EventArgs e)
         {
             Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
             WindowPosition = new Coordinate(form.Location.X + SystemInformation.BorderSize.Width, form.Location.Y + SystemInformation.BorderSize.Height);
         }
 
-        void form_LostFocus(object sender, EventArgs e)
+        static void form_LostFocus(object sender, EventArgs e)
         {
             Input.Mouse.FormHasFocus = false;
         }
 
-        void form_GotFocus(object sender, EventArgs e)
+        static void form_GotFocus(object sender, EventArgs e)
         {
             Input.Mouse.FormHasFocus = true;
         }
 
-        void form_SizeChanged(object sender, EventArgs e)
+        static void form_SizeChanged(object sender, EventArgs e)
         {
             //ModeDescription MD = new ModeDescription(form.ClientSize.Width, form.ClientSize.Height,
             //                            new Rational(60, 1), Format.R8G8B8A8_UNorm);
@@ -118,7 +121,7 @@ namespace NekuSoul.SharpDX_Engine
             //swapChain.ResizeBuffers(1, form.Width, form.Height, Format.A8_UNorm, SwapChainFlags.AllowModeSwitch);
         }
 
-        void UpdateScene()
+        static void UpdateScene()
         {
             if (Scene != null)
             {
@@ -126,7 +129,7 @@ namespace NekuSoul.SharpDX_Engine
             }
         }
 
-        void DrawScene()
+        static void DrawScene()
         {
             if (Scene != null)
             {
@@ -134,7 +137,7 @@ namespace NekuSoul.SharpDX_Engine
             }
         }
 
-        public void Run(Scene StartScene)
+        static public void Run(Scene StartScene)
         {
             GC.Collect();
             Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
@@ -161,22 +164,22 @@ namespace NekuSoul.SharpDX_Engine
             #endregion
         }
 
-        public void RunScene(Scene _Scene)
+        static public void RunScene(Scene _Scene)
         {
-            this.Scene = _Scene;
+            Game.Scene = _Scene;
         }
 
-        public void Close()
+        static public void Close()
         {
             form.Close();
         }
 
-        public void ShowMessageBox(string Caption, string Text)
+        static public void ShowMessageBox(string Caption, string Text)
         {
             MessageBox.Show(Text, Caption);
         }
 
-        public void SetName(string Name)
+        static public void SetName(string Name)
         {
             form.Text = Name;
         }

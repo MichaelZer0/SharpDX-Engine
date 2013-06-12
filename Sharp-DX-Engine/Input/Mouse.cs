@@ -1,9 +1,9 @@
-﻿using NekuSoul.SharpDX_Engine.Utitities;
+﻿using SharpDX_Engine.Utitities;
 using SharpDX.DirectInput;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NekuSoul.SharpDX_Engine.Input
+namespace SharpDX_Engine.Input
 {
     public class Mouse
     {

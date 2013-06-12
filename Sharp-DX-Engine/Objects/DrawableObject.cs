@@ -1,6 +1,7 @@
-﻿using NekuSoul.SharpDX_Engine.Utitities;
+﻿using SharpDX_Engine.Utitities;
+using SharpDX_Engine;
 
-namespace NekuSoul.SharpDX_Engine.Objects
+namespace SharpDX_Engine.Objects
 {
     public class Rectangle
     {
@@ -32,6 +33,7 @@ namespace NekuSoul.SharpDX_Engine.Objects
         public Size Size;
         public float Transparency;
         public bool CameraAffected;
+        public int FrameCount;
         //x private Rectangle Rectangle;
 
         public DrawableObject()
@@ -39,14 +41,19 @@ namespace NekuSoul.SharpDX_Engine.Objects
             Texture = "Default";
             Position = new Coordinate(0f, 0f);
             Offset = new Coordinate(0f, 0f);
-            Size = new Size(32f, 32f);
+            Size = new Size(Game.TextureManager.GetTexture(Texture).Size.Width, Game.TextureManager.GetTexture(Texture).Size.Height);
             Transparency = 1f;
             CameraAffected = true;
+            FrameCount = 1;
         }
     }
 
     public class SimpleDrawableObject : DrawableObject
     {
-
+        public SimpleDrawableObject(string Texture)
+        {
+            this.Texture = Texture;
+            Size = new Size(Game.TextureManager.GetTexture(Texture).Size.Width, Game.TextureManager.GetTexture(Texture).Size.Height);
+        }
     }
 }
