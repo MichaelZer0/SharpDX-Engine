@@ -95,6 +95,8 @@ namespace SharpDX_Engine
 
             Stopwatch = new Stopwatch();
             Stopwatch.Start();
+
+            Run();
         }
 
         static void form_Move(object sender, EventArgs e)
@@ -137,11 +139,11 @@ namespace SharpDX_Engine
             }
         }
 
-        static public void Run(Scene StartScene)
+        static private void Run()
         {
             GC.Collect();
             Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
-            Scene = StartScene;
+            Scene = new DummyScene();
             RenderLoop.Run(form, () =>
             {
                 if (Stopwatch.ElapsedMilliseconds > 10)

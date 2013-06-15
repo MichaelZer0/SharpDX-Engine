@@ -7,4 +7,13 @@ namespace SharpDX_Engine
         void Update();
         void Draw(RenderHelper Renderer);
     }
+
+    class DummyScene : Scene
+    {
+        public void Update()
+        { }
+
+        public void Draw(RenderHelper Renderer)
+        { }
+    }
 }
