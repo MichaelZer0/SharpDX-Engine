@@ -14,6 +14,7 @@ using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
+using System.Threading;
 
 namespace SharpDX_Engine
 {
@@ -29,7 +30,8 @@ namespace SharpDX_Engine
         static internal RenderForm form;
         static private SwapChain swapChain;
         static private Device1 device;
-        static Stopwatch Stopwatch;
+        static private Stopwatch Stopwatch;
+        static private Thread UpdateThread;
 
         /// <summary>
         /// A Game powered by SharpDX
@@ -96,7 +98,9 @@ namespace SharpDX_Engine
             Stopwatch = new Stopwatch();
             Stopwatch.Start();
 
-            Run();
+            Scene = new DummyScene();
+
+            UpdateThread = new Thread(UpdateScene);
         }
 
         static void form_Move(object sender, EventArgs e)
@@ -125,9 +129,17 @@ namespace SharpDX_Engine
 
         static void UpdateScene()
         {
-            if (Scene != null)
+            while (true)
             {
-                Scene.Update();
+                if (Scene != null)
+                {
+                    if (Stopwatch.ElapsedMilliseconds > 1)
+                    {
+                        Input.Update();
+                        Scene.Update();
+                        Stopwatch.Restart();
+                    }
+                }
             }
         }
 
@@ -139,22 +151,16 @@ namespace SharpDX_Engine
             }
         }
 
-        static private void Run()
+        static public void Run()
         {
             GC.Collect();
+            UpdateThread.Start();
             Input.Mouse.Point = new Point(form.Location.X + (form.Size.Width / 2), form.Location.Y + (form.Size.Height / 2));
-            Scene = new DummyScene();
             RenderLoop.Run(form, () =>
             {
-                if (Stopwatch.ElapsedMilliseconds > 10)
-                {
-                    Input.Update();
-                    Scene.Update();
-                    Stopwatch.Restart();
-                }
                 DrawScene();
                 swapChain.Present(0, PresentFlags.None);
-                //swapChain.ContainingOutput.WaitForVerticalBlank();
+                swapChain.ContainingOutput.WaitForVerticalBlank();
             });
 
             #region Close
@@ -166,7 +172,7 @@ namespace SharpDX_Engine
             #endregion
         }
 
-        static public void RunScene(Scene _Scene)
+        static public void SetScene(Scene _Scene)
         {
             Game.Scene = _Scene;
         }
@@ -181,7 +187,7 @@ namespace SharpDX_Engine
             MessageBox.Show(Text, Caption);
         }
 
-        static public void SetName(string Name)
+        static public void SetTitle(string Name)
         {
             form.Text = Name;
         }

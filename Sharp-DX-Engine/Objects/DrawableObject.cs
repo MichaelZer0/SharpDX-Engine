@@ -33,8 +33,8 @@ namespace SharpDX_Engine.Objects
         public Size Size;
         public float Transparency;
         public bool CameraAffected;
-        public int FrameCount;
-        //x private Rectangle Rectangle;
+        public int Frame;
+        public int State;
 
         public DrawableObject()
         {
@@ -44,7 +44,20 @@ namespace SharpDX_Engine.Objects
             Size = new Size(Game.TextureManager.GetTexture(Texture).Size.Width, Game.TextureManager.GetTexture(Texture).Size.Height);
             Transparency = 1f;
             CameraAffected = true;
-            FrameCount = 1;
+            Frame = 1;
+            State = 1;
+        }
+
+        public DrawableObject(string Texture)
+        {
+            this.Texture = Texture;
+            Position = new Coordinate(0f, 0f);
+            Offset = new Coordinate(0f, 0f);
+            Size = new Size(Game.TextureManager.GetTexture(Texture).Size.Width, Game.TextureManager.GetTexture(Texture).Size.Height);
+            Transparency = 1f;
+            CameraAffected = true;
+            Frame = 1;
+            State = 1;
         }
     }
 

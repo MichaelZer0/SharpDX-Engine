@@ -20,6 +20,7 @@ namespace SharpDX_Engine.Input
             _Mouse = new SharpDX.DirectInput.Mouse(DirectInput);
             _Mouse.Acquire();
             UpdateMouseState();
+            UpdateMouseState();
         }
 
         public void ShowCursor()

@@ -11,6 +11,7 @@ namespace SharpDX_Engine.Graphics
         public RenderTarget _RenderTarget;
         public Color _ClearColor;
         public Coordinate Camera;
+        private Coordinate EmptyCoordinate;
         private Size Zoom;
         TextFormat DefaultFormat = new TextFormat(new SharpDX.DirectWrite.Factory(), "Calibri", 16) { TextAlignment = TextAlignment.Leading, ParagraphAlignment = ParagraphAlignment.Near, WordWrapping = WordWrapping.NoWrap };
 
@@ -21,6 +22,7 @@ namespace SharpDX_Engine.Graphics
             this._RenderTarget = _RenderTarget;
             _RenderTarget.AntialiasMode = AntialiasMode.Aliased;
             _ClearColor = Color.Black;
+            EmptyCoordinate = new Coordinate(0, 0);
         }
 
         public void Draw(Scene ActiveScene)
@@ -40,31 +42,18 @@ namespace SharpDX_Engine.Graphics
 
         public void DrawObject(DrawableObject DrawableObject)
         {
-            //! TODO: Use Inline-If.
-            if (DrawableObject.CameraAffected)
+            if (DrawableObject != null)
             {
                 _RenderTarget.DrawBitmap(
                    Game.TextureManager.GetTexture(DrawableObject.Texture),
                        Utitities.Converter.CreateRectangleF(
-                       DrawableObject.Position + DrawableObject.Offset + Camera,
+                       DrawableObject.Position + DrawableObject.Offset + (DrawableObject.CameraAffected ? Camera : EmptyCoordinate),
                        DrawableObject.Size * Zoom),
                        DrawableObject.Transparency,
                        BitmapInterpolationMode.NearestNeighbor,
-                       new RectangleF((DrawableObject.FrameCount - 1) * DrawableObject.Size.width, 0, (DrawableObject.FrameCount) * DrawableObject.Size.width, DrawableObject.Size.height)
+                       new RectangleF((DrawableObject.Frame - 1) * DrawableObject.Size.width, (DrawableObject.State - 1) * DrawableObject.Size.height, (DrawableObject.Frame) * DrawableObject.Size.width, (DrawableObject.State) * DrawableObject.Size.height)
                        );
             }
-            else
-            {
-                _RenderTarget.DrawBitmap(
-                   Game.TextureManager.GetTexture(DrawableObject.Texture),
-                       Utitities.Converter.CreateRectangleF(
-                       DrawableObject.Position + DrawableObject.Offset,
-                       DrawableObject.Size * Zoom),
-                       DrawableObject.Transparency,
-                       BitmapInterpolationMode.NearestNeighbor
-                       );
-            }
-
         }
 
         public void DrawText(string Text, Coordinate Coordinate)
