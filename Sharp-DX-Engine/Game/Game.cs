@@ -8,13 +8,13 @@ using SharpDX_Engine.Utitities;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using AlphaMode = SharpDX.Direct2D1.AlphaMode;
 using Device1 = SharpDX.Direct3D10.Device1;
 using DriverType = SharpDX.Direct3D10.DriverType;
 using Factory = SharpDX.DXGI.Factory;
 using FeatureLevel = SharpDX.Direct3D10.FeatureLevel;
-using System.Threading;
 
 namespace SharpDX_Engine
 {
@@ -47,6 +47,7 @@ namespace SharpDX_Engine
             form.ClientSize = new System.Drawing.Size((int)Size.width, (int)Size.height);
             form.MaximizeBox = false;
             form.FormBorderStyle = FormBorderStyle.FixedSingle;
+            form.FormClosed += form_FormClosed;
 
             // SwapChain description
             SwapChainDescription desc = new SwapChainDescription()
@@ -101,6 +102,12 @@ namespace SharpDX_Engine
             Scene = new DummyScene();
 
             UpdateThread = new Thread(UpdateScene);
+        }
+
+        static void form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            UpdateThread.Abort();
+            Application.Exit();
         }
 
         static void form_Move(object sender, EventArgs e)

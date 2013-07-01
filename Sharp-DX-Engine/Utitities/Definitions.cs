@@ -1,4 +1,5 @@
 ﻿using SharpDX_Engine.Objects;
+using System;
 
 namespace SharpDX_Engine.Utitities
 {
@@ -83,6 +84,21 @@ namespace SharpDX_Engine.Utitities
         {
             this.Coordinate = Coordinate;
             this.Size = Size;
+        }
+
+        static public Rectangle Intersect(Rectangle A, Rectangle B)
+        {
+            float x1 = Math.Max(A.Coordinate.X, B.Coordinate.X);
+            float x2 = Math.Min(A.Coordinate.X + A.Size.width, B.Coordinate.X + B.Size.width);
+            float y1 = Math.Max(A.Coordinate.Y, B.Coordinate.Y);
+            float y2 = Math.Min(A.Coordinate.Y + A.Size.height, B.Coordinate.Y + B.Size.height);
+
+            if (x2 >= x1
+                && y2 >= y1)
+            {
+                return new Rectangle(new Coordinate(x1, y1), new Size(x2 - x1, y2 - y1));
+            }
+            return default(Rectangle);
         }
     }
 
