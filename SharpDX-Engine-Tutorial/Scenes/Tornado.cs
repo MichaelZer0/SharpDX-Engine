@@ -1,10 +1,10 @@
-﻿using NekuSoul.SharpDX_Engine;
-using NekuSoul.SharpDX_Engine.Graphics;
-using NekuSoul.SharpDX_Engine_Tutorial.Objects.Tornado;
+﻿using SharpDX_Engine;
+using SharpDX_Engine.Graphics;
+using SharpDX_Engine_Tutorial.Objects.Tornado;
 using System;
 using System.Collections.Generic;
 
-namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
+namespace SharpDX_Engine_Tutorial.Scenes
 {
     //! Magically draws a Tornado on the screen.
     class Tornado : Scene
@@ -33,7 +33,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
 
         public void Draw(RenderHelper Renderer)
         {
-            foreach (Circle Circle in Circles)
+            foreach (Circle Circle in Circles.ToArray())
             {
                 Renderer.DrawObject(Circle);
             }

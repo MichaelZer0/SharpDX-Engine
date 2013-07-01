@@ -1,7 +1,7 @@
-﻿using NekuSoul.SharpDX_Engine.Objects;
-using NekuSoul.SharpDX_Engine.Utitities;
+﻿using SharpDX_Engine.Objects;
+using SharpDX_Engine.Utitities;
 
-namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
+namespace SharpDX_Engine_Tutorial.Objects.Ingame
 {
     //! This displays a AI behaviour.
     public class Icon : DrawableObject

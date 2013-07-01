@@ -1,8 +1,9 @@
-﻿using NekuSoul.SharpDX_Engine.Objects;
-using NekuSoul.SharpDX_Engine.Utitities;
+﻿using SharpDX_Engine_Tutorial.Objects;
+using SharpDX_Engine.Utitities;
 using System;
+using SharpDX_Engine.Objects;
 
-namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame
+namespace SharpDX_Engine_Tutorial.Objects.Ingame
 {
     class Unit : DrawableObject
     {

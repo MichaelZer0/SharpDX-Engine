@@ -1,13 +1,13 @@
-﻿using NekuSoul.SharpDX_Engine;
-using NekuSoul.SharpDX_Engine.Graphics;
-using NekuSoul.SharpDX_Engine.Input;
-using NekuSoul.SharpDX_Engine.Utitities;
-using NekuSoul.SharpDX_Engine_Tutorial.Objects;
-using NekuSoul.SharpDX_Engine_Tutorial.Objects.Ingame;
+﻿using SharpDX_Engine;
+using SharpDX_Engine.Graphics;
+using SharpDX_Engine.Input;
+using SharpDX_Engine.Utitities;
+using SharpDX_Engine_Tutorial.Objects;
+using SharpDX_Engine_Tutorial.Objects.Ingame;
 using System.Collections.Generic;
 using System;
 
-namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
+namespace SharpDX_Engine_Tutorial.Scenes
 {
     class Ingame : Scene
     {
@@ -50,56 +50,56 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
         public void Update()
         {
             //! Exits the game when the Escape Key is pressed.
-            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.Escape))
+            if (Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.Escape))
             {
-                Program.Game.RunScene(new MainMenu());
+                Game.SetScene(new MainMenu());
             }
 
             Cursor.UpdatePosition();
 
             //! If both the Left and Right Mouse-Button are pressed, go back to the Main Menu.
-            if (Program.Game.Input.Mouse.CheckButtonClickUp(Mouse.Button.LeftMouse) && Program.Game.Input.Mouse.CheckButtonDown(Mouse.Button.RightMouse))
+            if (Game.Input.Mouse.CheckButtonClickUp(Mouse.Button.LeftMouse) && Game.Input.Mouse.CheckButtonDown(Mouse.Button.RightMouse))
             {
-                Program.Game.RunScene(new MainMenu());
+                Game.SetScene(new MainMenu());
             }
 
             //! Spawns a new Unit on Left-Click that is following the last Unit spawned or spams them with Space.
-            if (Program.Game.Input.Mouse.CheckButtonClickDown(Mouse.Button.LeftMouse) || Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Space))
+            if (Game.Input.Mouse.CheckButtonClickDown(Mouse.Button.LeftMouse) || Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Space))
             {
                 Units.Add(new Unit(Units[Units.Count - 1]));
             }
 
             //! Switches AI behaviour based on Key.
-            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D1))
+            if (Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D1))
             {
                 ChangeAIMode(1);
             }
-            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D2))
+            if (Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D2))
             {
                 ChangeAIMode(2);
             }
-            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D3))
+            if (Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D3))
             {
                 ChangeAIMode(3);
             }
-            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D4))
+            if (Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D4))
             {
                 ChangeAIMode(4);
             }
-            if (Program.Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D5))
+            if (Game.Input.Keyboard.IsKeyPushedDown(Keyboard.Key.D5))
             {
                 ChangeAIMode(5);
             }
 
             //! Changes Game Speed
-            if (Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Add))
+            if (Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Add))
             {
                 if (Speed < 5f)
                 {
                     Speed += 0.1f;
                 }
             }
-            if (Program.Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Subtract))
+            if (Game.Input.Keyboard.IsKeyDown(Keyboard.Key.Subtract))
             {
                 if (Speed > 0f)
                 {
@@ -164,7 +164,7 @@ namespace NekuSoul.SharpDX_Engine_Tutorial.Scenes
                 I.Disable();
             }
             Icons[NewBahaviour - 1].Activate();
-            Program.Game.Sound.PlaySound("Select");
+            Game.Sound.PlaySound("Select");
             switch (NewBahaviour)
             {
                 case 1:

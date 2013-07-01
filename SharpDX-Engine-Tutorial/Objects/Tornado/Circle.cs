@@ -1,7 +1,7 @@
-﻿using NekuSoul.SharpDX_Engine.Objects;
+﻿using SharpDX_Engine.Objects;
 using System;
 
-namespace NekuSoul.SharpDX_Engine_Tutorial.Objects.Tornado
+namespace SharpDX_Engine_Tutorial.Objects.Tornado
 {
     //! This is just a part of the Tornado-Magic.
     class Circle : DrawableObject
